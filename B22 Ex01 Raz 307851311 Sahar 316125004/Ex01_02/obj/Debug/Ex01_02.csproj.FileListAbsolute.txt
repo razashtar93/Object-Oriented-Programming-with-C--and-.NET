@@ -1,0 +1,6 @@
+C:\Users\ashta\source\repos\B22 Ex01 Raz 307851311 Sahar 316125004\Ex01_02\bin\Debug\Ex01_02.exe
+C:\Users\ashta\source\repos\B22 Ex01 Raz 307851311 Sahar 316125004\Ex01_02\bin\Debug\Ex01_02.pdb
+C:\Users\ashta\source\repos\B22 Ex01 Raz 307851311 Sahar 316125004\Ex01_02\obj\Debug\Ex01_02.csproj.AssemblyReference.cache
+C:\Users\ashta\source\repos\B22 Ex01 Raz 307851311 Sahar 316125004\Ex01_02\obj\Debug\Ex01_02.csproj.CoreCompileInputs.cache
+C:\Users\ashta\source\repos\B22 Ex01 Raz 307851311 Sahar 316125004\Ex01_02\obj\Debug\Ex01_02.exe
+C:\Users\ashta\source\repos\B22 Ex01 Raz 307851311 Sahar 316125004\Ex01_02\obj\Debug\Ex01_02.pdb
