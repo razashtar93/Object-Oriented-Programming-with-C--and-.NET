@@ -40,11 +40,11 @@ namespace Ex01_01
             Console.WriteLine("How many of the binary number are Palindrome: " + (isPalindrome(firstBinNumInt) + isPalindrome(secondBinNumInt) + isPalindrome(thirdBinNumInt)));
 
             // Greatest and smallest numbers
-            Console.WriteLine("The Greatest number: " + gratestDecNum(firstBinNumInt, secondBinNumInt, thirdBinNumInt));
-            Console.WriteLine("The smallest numbre: " + smallestDecNum(firstBinNumInt, secondBinNumInt, thirdBinNumInt));
+            Console.WriteLine("The Greatest number: " + gratesti_DecNum(firstBinNumInt, secondBinNumInt, thirdBinNumInt));
+            Console.WriteLine("The smallest numbre: " + smallesti_DecNum(firstBinNumInt, secondBinNumInt, thirdBinNumInt));
 
             // How many of the integers are a power of 2 
-            Console.WriteLine("How many of the integers are a power of 2: " + (isPowerOfTwo(firstBinNumInt) + isPowerOfTwo(secondBinNumInt) + isPowerOfTwo(thirdBinNumInt)) );
+            Console.WriteLine("How many of the integers are a power of 2: " + (isPowerOfTwo(firstBinNumInt) + isPowerOfTwo(secondBinNumInt) + isPowerOfTwo(thirdBinNumInt)));
 
             //How many of the integers consist of digits which are a "strictly monotonically"
             Console.WriteLine("How many of the integers  consist of digits which are a strictly monotonically: " + (isDigitsStrictlyMonoton(firstBinNumInt) + isDigitsStrictlyMonoton(secondBinNumInt) + isDigitsStrictlyMonoton(thirdBinNumInt)));
@@ -53,14 +53,14 @@ namespace Ex01_01
 
         private static string checkValidationOfInput(string i_UserInput)
         {
-            while (!isLengthValid(i_UserInput,8) || !isBinary(i_UserInput))
+            while (!isLengthValid(i_UserInput, 8) || !isBinary(i_UserInput))
             {
                 if (!isBinary(i_UserInput))
                 {
                     Console.WriteLine("Not valid input, please enter binary number");
                     i_UserInput = Console.ReadLine();
                 }
-                else if (!isLengthValid(i_UserInput,8))
+                else if (!isLengthValid(i_UserInput, 8))
                 {
                     Console.WriteLine("Not valid input, please enter binary number that contain 8 digits");
                     i_UserInput = Console.ReadLine();
@@ -70,17 +70,19 @@ namespace Ex01_01
         }
 
 
-        private static bool isLengthValid(string i_UserInput , int exceptedLength)
+        private static bool isLengthValid(string i_UserInput, int i_exceptedLength)
         {
-            return i_UserInput.Length == exceptedLength;
+            return i_UserInput.Length == i_exceptedLength;
         }
 
-        private static bool isBinary(string i_UserInput)
+        private static bool isBinary(string i_BinaryNumStr)
         {
-            for (int i = 0; i < i_UserInput.Length; i++)
+            for (int i = 0; i < i_BinaryNumStr.Length; i++)
             {
-                if (i_UserInput[i] != '0' && i_UserInput[i] != '1')
+                if (i_BinaryNumStr[i] != '0' && i_BinaryNumStr[i] != '1')
+                {
                     return false;
+                }
             }
             return true;
         }
@@ -89,37 +91,37 @@ namespace Ex01_01
         private static int binStrToDecInt(string i_BinStr)
         {
             int powOf2 = 1;
-            int decNumInt = 0;
+            int i_i_DecNumInt = 0;
 
             for (int i = i_BinStr.Length - 1; i >= 0; i--)
             {
-                decNumInt += (int)(i_BinStr[i] - '0') * powOf2;
+                i_i_DecNumInt += (int)(i_BinStr[i] - '0') * powOf2;
                 powOf2 *= 2;
             }
-            return decNumInt;
+            return i_i_DecNumInt;
         }
 
 
-        private static float avgOfCharInStr(string i_firstUserInput, string i_secondUserInput, string i_thirdUserInput, char charToCheckAvgOfApear)
+        private static float avgOfCharInStr(string i_FirsBinaryNumStr, string i_SecondBinaryNumStr, string i_ThirdBinaryNumStr, char i_CharToCheckAvgOfApear)
         {
             int counterOfCharAper = 0;
-            for (int i = 0; i < i_firstUserInput.Length; i++)
+            for (int i = 0; i < i_FirsBinaryNumStr.Length; i++)
             {
-                if (i_firstUserInput[i] == charToCheckAvgOfApear)
+                if (i_FirsBinaryNumStr[i] == i_CharToCheckAvgOfApear)
                 {
                     counterOfCharAper++;
                 }
             }
-            for (int i = 0; i < i_secondUserInput.Length; i++)
+            for (int i = 0; i < i_SecondBinaryNumStr.Length; i++)
             {
-                if (i_secondUserInput[i] == charToCheckAvgOfApear)
+                if (i_SecondBinaryNumStr[i] == i_CharToCheckAvgOfApear)
                 {
                     counterOfCharAper++;
                 }
             }
-            for (int i = 0; i < i_thirdUserInput.Length; i++)
+            for (int i = 0; i < i_ThirdBinaryNumStr.Length; i++)
             {
-                if (i_thirdUserInput[i] == charToCheckAvgOfApear)
+                if (i_ThirdBinaryNumStr[i] == i_CharToCheckAvgOfApear)
                 {
                     counterOfCharAper++;
                 }
@@ -128,53 +130,60 @@ namespace Ex01_01
         }
 
 
-        private static int isPalindrome(int decNumInt)
+        private static int isPalindrome(int i_i_DecNumInt)
         {
-            string decNumStr = decNumInt.ToString();
-            if (decNumStr.Length == 0 || decNumStr.Length == 1)
+            string i_DecNumStr = i_i_DecNumInt.ToString();
+            if (i_DecNumStr.Length == 0 || i_DecNumStr.Length == 1)
+            {
                 return 1;
-      
-                if (decNumStr[0] != decNumStr[decNumStr.Length - 1])
+            }
+            if (i_DecNumStr[0] != i_DecNumStr[i_DecNumStr.Length - 1])
+            {
+                return 0;
+            }
+            return isPalindrome(int.Parse(i_DecNumStr.Substring(1, i_DecNumStr.Length - 2)));
+        }
+
+
+        private static int smallesti_DecNum(int i_Num1, int i_Num2, int i_Num3)
+        {
+            return Math.Min(Math.Min(i_Num1, i_Num2), i_Num3);
+        }
+
+
+        private static int gratesti_DecNum(int i_Num1, int i_Num2, int i_Num3)
+        {
+            return Math.Max(Math.Max(i_Num1, i_Num2), i_Num3);
+        }
+
+
+        private static int isPowerOfTwo(int i_DecNum)
+        {
+            if (i_DecNum == 0)
+            {
+                return 0;
+            }
+            while (i_DecNum != 1)
+            {
+                if (i_DecNum % 2 != 0)
                 {
                     return 0;
                 }
-            return isPalindrome(int.Parse(decNumStr.Substring(1,decNumStr.Length - 2)));
-        }
-
-
-        private static int smallestDecNum(int i_num1, int i_num2, int i_num3)
-        {
-            return Math.Min(Math.Min(i_num1, i_num2), i_num3);
-        }
-
-
-        private static int gratestDecNum(int i_num1, int i_num2, int i_num3)
-        {
-            return Math.Max(Math.Max(i_num1, i_num2), i_num3);
-        }
-
-
-        private static int isPowerOfTwo(int decNum)
-        {
-            if (decNum == 0)
-                return 0;
-            while (decNum != 1)
-            {
-                if (decNum % 2 != 0)
-                    return 0;
-                decNum = decNum / 2;
+                i_DecNum = i_DecNum / 2;
             }
             return 1;
         }
 
 
-        private static int isDigitsStrictlyMonoton(int decNum) 
+        private static int isDigitsStrictlyMonoton(int i_DecNum)
         {
-            string numStr = decNum.ToString();
-            for(int i = 0; i < numStr.Length - 1; i++)
+            string numStr = i_DecNum.ToString();
+            for (int i = 0; i < numStr.Length - 1; i++)
             {
-                if(numStr[i] >= numStr[i+1])
+                if (numStr[i] >= numStr[i + 1])
+                {
                     return 0;
+                }
             }
             return 1;
         }
