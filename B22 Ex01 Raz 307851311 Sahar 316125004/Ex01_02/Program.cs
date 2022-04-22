@@ -7,45 +7,43 @@ namespace Ex01_02
 {
     public class Program
     {
-        static void Main()
+        public static void Main()
         {
-            /// This is the entry point
             RunProgram();
         }
 
         public static void RunProgram()
         {
             RunSandClock(5);
-            System.Console.WriteLine("Press \"Enter\" to exit");
-            System.Console.ReadLine();
+            Console.WriteLine("Press \"Enter\" to exit");
+            Console.ReadLine();
         }
 
-        public static void RunSandClock(int i_numOfAsterisks)
+        public static void RunSandClock(int i_NumOfAsterisks)
         {
             StringBuilder strOfAsterisks = new StringBuilder();
 
-            if (i_numOfAsterisks % 2 == 0)
+            if (i_NumOfAsterisks % 2 == 0)
             {
-                i_numOfAsterisks++;
+                i_NumOfAsterisks++;
             }
 
-            strOfAsterisks.Append('*', i_numOfAsterisks);
-            displaySandClockMadeOfAsterisks(strOfAsterisks, i_numOfAsterisks);
+            strOfAsterisks.Append('*', i_NumOfAsterisks);
+            displaySandClockMadeOfAsterisks(strOfAsterisks, i_NumOfAsterisks);
         }
 
-        private static void displaySandClockMadeOfAsterisks(StringBuilder i_strOfAsterisks, int i_numOfAsterisks)
+        private static void displaySandClockMadeOfAsterisks(StringBuilder i_StrOfAsterisks, int i_NumOfAsterisks)
         {
-            System.Console.WriteLine(i_strOfAsterisks);
-            if( i_numOfAsterisks > 1)
+            Console.WriteLine(i_StrOfAsterisks);
+            if (i_NumOfAsterisks > 1)
             {
-                i_strOfAsterisks.Remove(i_strOfAsterisks.Length - 2, 2);
-                i_strOfAsterisks.Insert(0, ' ');
-                displaySandClockMadeOfAsterisks(i_strOfAsterisks, i_numOfAsterisks - 2);
-                i_strOfAsterisks.Remove(0, 1);
-                i_strOfAsterisks.Append("**");
-                System.Console.WriteLine(i_strOfAsterisks);
+                i_StrOfAsterisks.Remove(i_StrOfAsterisks.Length - 2, 2);
+                i_StrOfAsterisks.Insert(0, ' ');
+                displaySandClockMadeOfAsterisks(i_StrOfAsterisks, i_NumOfAsterisks - 2);
+                i_StrOfAsterisks.Remove(0, 1);
+                i_StrOfAsterisks.Append("**");
+                Console.WriteLine(i_StrOfAsterisks);
             }
-
         }
     }
 }
