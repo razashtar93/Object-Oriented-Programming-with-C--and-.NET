@@ -7,34 +7,33 @@ namespace Ex01_03
 {
     class Program
     {
-        static void Main()
+        public static void Main()
         {
-            /// This is the entry point
             RunProgram();
         }
 
         public static void RunProgram()
         {
-            System.Console.WriteLine("Please enter the number of lines for the sand clock:");
-            string userInput = System.Console.ReadLine();
+            Console.WriteLine("Please enter the number of lines for the sand clock:");
+            string userInput = Console.ReadLine();
             int numOfLines = CheckAndGetCorrectInput(userInput);
 
             Ex01_02.Program.RunSandClock(numOfLines);
-            System.Console.WriteLine("Press \"Enter\" to exit");
-            System.Console.ReadLine();
+            Console.WriteLine("Press \"Enter\" to exit");
+            Console.ReadLine();
         }
 
-        public static int CheckAndGetCorrectInput(string inputToCheck)
+        public static int CheckAndGetCorrectInput(string i_InputToCheck)
         {
-            int positivenumOfLines = 0;
+            int positiveNumOfLines = 0;
 
-            while (!int.TryParse(inputToCheck, out positivenumOfLines) || positivenumOfLines < 1)
+            while (!int.TryParse(i_InputToCheck, out positiveNumOfLines) || positiveNumOfLines < 1)
             {
                 System.Console.WriteLine("Your input is invalid, please enter positive number of Lines for the sand clock");
-                inputToCheck = System.Console.ReadLine();
+                i_InputToCheck = Console.ReadLine();
             }
 
-            return positivenumOfLines;
+            return positiveNumOfLines;
         }
     }
 }
