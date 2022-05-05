@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B22_Ex02
 {
-    class Game
+    public class Game
     {
         //private
         public bool v_GameAlive;

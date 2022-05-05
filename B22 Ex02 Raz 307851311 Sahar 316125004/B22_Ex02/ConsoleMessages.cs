@@ -5,9 +5,10 @@ using System.Text;
 
 namespace B22_Ex02
 {
-    public class Player
+    public class consoleMessages
     {
-        // id? or somthing like player 1 player2 or idk ...
+
+        // here will be all the messages to the console ..
 
     }
 }
