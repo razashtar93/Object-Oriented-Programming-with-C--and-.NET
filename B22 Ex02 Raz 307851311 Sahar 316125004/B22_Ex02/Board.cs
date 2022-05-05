@@ -13,7 +13,7 @@ namespace B22_Ex02
         }
 
 
-        private readonly eBoardSize r_SizeOfBoard; // from the enums i guess ...
+        private readonly eBoardSize r_SizeOfBoard; // how do user chhose the size?
         // 
 
 

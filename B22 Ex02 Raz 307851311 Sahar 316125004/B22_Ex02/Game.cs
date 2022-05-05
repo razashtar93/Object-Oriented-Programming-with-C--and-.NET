@@ -37,17 +37,32 @@ namespace B22_Ex02
             // create player object 
             //create another player object or computer object depand on user chice
 
-
-
         }
 
 
         public void Run()
         {
+            while (v_GameAlive)
+            {
 
+            }
         }
 
 
+        public void ResetGame() // reset the game for another play
+        {
+            // call it when PlayAgain() return true
+        }
+
+
+        public void EndGame()
+        {
+            // call it when PlayAgain() return false
+
+
+            v_GameAlive = false;
+            // print to console goodbye or somthing 
+        }
 
 
         private bool PlayAgain()
