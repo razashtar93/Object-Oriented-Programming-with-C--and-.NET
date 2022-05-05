@@ -13,7 +13,10 @@ namespace B22_Ex02
         }
 
 
-        private readonly eBoardSize m_SizeOfBoard; // from the enums i guess ...
+        private readonly eBoardSize r_SizeOfBoard; // from the enums i guess ...
+        // 
+
+
         // add more here
 
 
@@ -40,13 +43,13 @@ namespace B22_Ex02
             //make sure here to return the real size and not the multipication of the rows and cols
             int size;
 
-            if (m_SizeOfBoard == eBoardSize.six)
+            if (r_SizeOfBoard == eBoardSize.six)
             {
                 size = 6;
             }
             else
             {
-                if (m_SizeOfBoard == eBoardSize.eight)
+                if (r_SizeOfBoard == eBoardSize.eight)
                 {
                     size = 8;
                 }

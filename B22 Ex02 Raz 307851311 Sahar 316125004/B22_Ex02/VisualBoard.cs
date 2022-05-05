@@ -7,36 +7,51 @@ namespace B22_Ex02
 {
     public class VisualBoard
     {
-        public static void ShowBoard(Board i_BoardGame) // i_Board game is a matrix of the board
+
+        public static void ShowBoard(char[,] i_BoardGame)
         {
+            int boardSize = i_BoardGame.GetLength(0);
+            char[] rowUpperLetter = new char[10] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+            char[] rowLowerLetter = new char[10] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
+            string lineDivider = " ";
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                lineDivider += "====";
+            }
+
             Ex02.ConsoleUtils.Screen.Clear();
 
             StringBuilder board = new StringBuilder();
 
-            for (int i = 0; i < i_BoardGame.BoardSize(); i++)
+            board.Append(" ");
+
+            for (int i = 0; i < boardSize; i++)
             {
-                board.AppendFormat(" {0}", i + 'A'); // check this
+                board.AppendFormat("  {0} ", rowUpperLetter[i]);
             }
 
             board.AppendLine();
+            board.Append(lineDivider);
+            board.AppendLine();
 
-            for (int i = 0; i < i_BoardGame.BoardSize(); i++)
+
+            for (int i = 0; i < boardSize; i++)
             {
-                board.AppendFormat(i + 'a' + " |");
+                board.AppendFormat("{0}|", rowLowerLetter[i]);
 
-                for (int j = 0; j < i_BoardGame.BoardSize(); j++)
+                for (int j = 0; j < boardSize; j++)
                 {
                     board.AppendFormat(" {0} |", i_BoardGame[i, j]);
                 }
 
                 board.AppendLine();
-                board.Append(" ");
-                board.Append('=', i_BoardGame.BoardSize() * 4);
-                board.Append("\n");
+                board.Append(lineDivider);
+                board.AppendLine();
             }
 
             Console.WriteLine(board);
-
+            Console.ReadLine();
         }
     }
 }
