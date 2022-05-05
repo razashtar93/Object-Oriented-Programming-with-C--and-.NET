@@ -7,7 +7,13 @@ namespace B22_Ex02
 {
     class Board // all the logic of a board is placed here
     {
-        public int m_SizeOfBoard;
+        public enum eBoardSize
+        {
+            six = 6, eight = 8, ten = 10
+        }
+
+
+        public int m_SizeOfBoard; // from the enums i guess ...
         // add more here
 
 
@@ -24,10 +30,15 @@ namespace B22_Ex02
                we need to use enum and the matrix will be only of type 'X' and 'O' or somthing .. */
 
             // maybe array of chars and validate that onlu contain 'X' 'O' 
+
+            //todo: implement the matrix of chars where valid inputs are: {'X', 'O', ' ', 'Q', 'Z'}
         }
 
 
-
+        public int Size()
+        {
+            return m_SizeOfBoard;
+        }
 
 
     }
