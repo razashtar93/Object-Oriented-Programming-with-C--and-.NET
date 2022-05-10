@@ -14,14 +14,6 @@ namespace B22_Ex02
         private Board m_GameBoard = null;
 
 
-        private readonly String r_OpenStatement = "Welcome To American Cheackers.";
-        private readonly String r_OpponentChoosingStatement = "Choose Opponent: ";
-        private readonly String r_ComputerChoosing = "To play against the computer please press 1.";
-        private readonly String r_HumanChoosing = "To play against another player please press 2.";
-        private readonly String r_InValideInputeError = "The input is invalid, Please try again.";
-        private readonly String r_SizeOfBoardMessege = "Please choose the size of the board: (6,8 or 10)";
-        private readonly String r_PointsStatementMessege = "The points are player one: {0} and player two: {1}";
-        private readonly String r_PlayAgainMessege = "Wanna play again? [y/n]";
 
 
         public Game()
@@ -32,11 +24,11 @@ namespace B22_Ex02
 
         public void InitGame()
         {
-            // welcome message
-            // initialize all the fields ... (size of board and more)
-            // create player object 
-            //create another player object or computer object depand on user chice
-
+            consoleMessages.OpenStatement();
+            string playerOneName = ConsoleInputValidation.GetPlayerName();
+            int boardSize = ConsoleInputValidation.GetSizeOfBoard(); 
+            int opponentChoise = ConsoleInputValidation.GetOpponentChoise();
+            consoleMessages.LetsPlay();
         }
 
 
@@ -44,10 +36,10 @@ namespace B22_Ex02
         {
             while (v_GameAlive)
             {
-                playerOneMove();
-                isWonOrDraw(player); //
-                playerTwoMove(); // player2 or computer ...
-                isWonOrDraw(player);
+                //playerOneMove();
+                //isWonOrDraw(player); //
+                //playerTwoMove(); // player2 or computer ...
+                //isWonOrDraw(player);
             }
         }
 
@@ -87,18 +79,10 @@ namespace B22_Ex02
 
         private bool PlayAgain() // change that all console messages go to anothe class and use calls to that class
         {
-
-            Console.WriteLine(r_PlayAgainMessege);
-            string userResponse = Console.ReadLine();
+            string userResponseForPlayAgain = ConsoleInputValidation.GetUserResponseForPlayAgaine();
             bool userAnswer;
-
-            while (userResponse.ToLower() != "y" && userResponse.ToLower() != "n")
-            {
-                Console.WriteLine(r_InValideInputeError);
-                userResponse = Console.ReadLine();
-            }
-
-            if (userResponse.ToLower() == "y")
+ 
+            if (userResponseForPlayAgain.ToLower() == "y")
             {
                 userAnswer = true;
             }
