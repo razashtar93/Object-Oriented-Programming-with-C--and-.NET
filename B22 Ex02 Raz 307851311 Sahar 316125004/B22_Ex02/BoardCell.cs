@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B22_Ex02
 {
-    class BoardCell
+    public class BoardCell
     {
         public eCellValue CellValue
         {

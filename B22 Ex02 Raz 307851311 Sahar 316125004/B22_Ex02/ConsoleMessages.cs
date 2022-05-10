@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B22_Ex02
 {
-    public class consoleMessages
+    public class ConsoleMessages
     {
         public static void OpenStatement()
         {
@@ -55,6 +55,46 @@ namespace B22_Ex02
         public static void LetsPlay()
         {
             Console.WriteLine("Lets play!");
+        }
+
+        public static void PlayerWinningMessage(string i_Name)
+        {
+            Console.WriteLine("Congrats! " + i_Name + " is won\n");
+        }
+
+        public static void PrintScore(Player i_Player1, Player i_Player2)
+        {
+
+            Console.WriteLine("The Score is:");
+            Console.WriteLine(i_Player1.Name + " Score is: " + i_Player1.Score);
+            Console.WriteLine(i_Player2.Name + " Score is: " + i_Player2.Score);
+        }
+
+
+
+
+        public static void PrintPlayerTurn(string i_playerName, int playerNumber)
+        {
+            if (playerNumber == 1)
+            {
+                Console.WriteLine(i_playerName + " Turn (X) :");
+            }
+            else
+            {
+                Console.WriteLine(i_playerName + " Turn (O) :");
+            }
+        }
+
+        public static void PrintPlayerMove(string i_playerMove, string i_playerName, int playerNumber)
+        {
+            if (playerNumber == 1)
+            {
+                Console.WriteLine(i_playerName + " move was (X) : " + i_playerMove);
+            }
+            else
+            {
+                Console.WriteLine(i_playerName + " move was (O) : " + i_playerMove);
+            }
         }
 
 

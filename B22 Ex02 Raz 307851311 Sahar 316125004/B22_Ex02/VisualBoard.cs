@@ -11,11 +11,11 @@ namespace B22_Ex02
         //get board of Boardcell 
         //in each boardcell check the type and print the relevant value (meaning 'O' or 'X' or 'Q' or 'Z')
 
-        public static void ShowBoard(char[,] i_BoardGame)
+        public static void ShowBoard(BoardCell[,] i_BoardGame)
         {
             int boardSize = i_BoardGame.GetLength(0);
-            char[] rowUpperLetter = new char[10] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
-            char[] rowLowerLetter = new char[10] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
+            // char[] rowUpperLetter = new char[10] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+            //char[] rowLowerLetter = new char[10] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
             string lineDivider = " ";
 
             for (int i = 0; i < boardSize; i++)
@@ -31,7 +31,7 @@ namespace B22_Ex02
 
             for (int i = 0; i < boardSize; i++)
             {
-                board.AppendFormat("  {0} ", rowUpperLetter[i]);
+                board.AppendFormat("  {0} ", Convert.ToChar('A' + i));
             }
 
             board.AppendLine();
@@ -41,11 +41,11 @@ namespace B22_Ex02
 
             for (int i = 0; i < boardSize; i++)
             {
-                board.AppendFormat("{0}|", rowLowerLetter[i]);
+                board.AppendFormat("{0}|", Convert.ToChar('a' + i));
 
                 for (int j = 0; j < boardSize; j++)
                 {
-                    board.AppendFormat(" {0} |", i_BoardGame[i, j]);
+                    board.AppendFormat(" {0} |", ((char)i_BoardGame[i, j].CellValue)); // check this
                 }
 
                 board.AppendLine();

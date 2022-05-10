@@ -7,22 +7,24 @@ namespace B22_Ex02
 {
     public class Player
     {
-        // id? or somthing like player 1 player2 or idk ...
+        private string m_Name;
         private int m_Score;
-        // public int Sign { get; }
 
-        public Player()// int i_sign)
+
+        public Player(string i_Name)
         {
+            m_Name = i_Name;
             m_Score = 0;
-            // Sign = i_Sign
         }
 
-
+        public string Name
+        {
+            get { return m_Name; }
+        }
         public int Score
         {
             get => m_Score;
             set => m_Score = value;
         }
-
     }
 }
