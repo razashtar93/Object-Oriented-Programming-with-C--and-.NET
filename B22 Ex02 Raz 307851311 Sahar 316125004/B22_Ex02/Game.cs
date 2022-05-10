@@ -44,8 +44,28 @@ namespace B22_Ex02
         {
             while (v_GameAlive)
             {
-
+                playerOneMove();
+                isWonOrDraw(player); //
+                playerTwoMove(); // player2 or computer ...
+                isWonOrDraw(player);
             }
+        }
+
+
+        private void playerOneMove() //TODO: Implement this
+        {
+            
+        }
+
+        private void isWonOrDraw(Player player) //TODO: Implement this
+        {
+            
+        }
+
+        public void playerTwoMove() //TODO: Implement this
+        {
+            //if (computer) ... else ...
+
         }
 
 
@@ -65,7 +85,7 @@ namespace B22_Ex02
         }
 
 
-        private bool PlayAgain()
+        private bool PlayAgain() // change that all console messages go to anothe class and use calls to that class
         {
 
             Console.WriteLine(r_PlayAgainMessege);

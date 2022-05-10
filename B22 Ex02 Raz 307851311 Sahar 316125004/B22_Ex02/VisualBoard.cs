@@ -7,6 +7,9 @@ namespace B22_Ex02
 {
     public class VisualBoard
     {
+        // need to change to:
+        //get board of Boardcell 
+        //in each boardcell check the type and print the relevant value (meaning 'O' or 'X' or 'Q' or 'Z')
 
         public static void ShowBoard(char[,] i_BoardGame)
         {
