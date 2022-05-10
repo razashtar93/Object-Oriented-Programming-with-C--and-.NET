@@ -9,7 +9,8 @@ namespace B22_Ex02
     {
         public static void Main()
         {
-            //americanCheckers();
+            //Game game = new Game();
+            americanCheckers();
 
 
             //===============================
@@ -17,7 +18,7 @@ namespace B22_Ex02
 
             char[,] board = new char[8, 8];
             int boardSize = board.GetLength(0);
-            
+
 
             for (int i = 0; i < boardSize; i++)
             {
@@ -39,17 +40,17 @@ namespace B22_Ex02
             VisualBoard.ShowBoard(board);
 
         }
+
+
         //===========================
 
 
-
+        private static void americanCheckers()
+        {
+            Game game = new Game();
+            // game.playGame(); /  game.Run / or something else ..
+        }
 
     }
-
-    /*   private static void americanCheckers()
-       {
-           // Game game = new Game();
-           // game.playGame(); /  game.Run / or something else ..
-       }*/
 }
 

@@ -7,63 +7,35 @@ namespace B22_Ex02
 {
     public class Board // all the logic of a board is placed here
     {
-        public enum eBoardSize
+        public int m_player1SoldiersCounter = 0;
+        public int m_player2SoldiersCounter = 0;
+        public int m_SizeOfBoard;
+        private readonly BoardCell[,] r_Board;
+
+        public Board(int i_BoardSize) // constructor
         {
-            six = 6, eight = 8, ten = 10
-        }
+            m_SizeOfBoard = i_BoardSize;
+            r_Board = new BoardCell[m_SizeOfBoard, m_SizeOfBoard];
+            initializeBoard();
 
-
-        private readonly eBoardSize r_SizeOfBoard; // how do user chhose the size?
-        // 
-
-
-        // add more here
-
-
-
-        public Board(int i_BoardSize)
-        {
-            //constructor for board
         }
 
         private void initializeBoard()
         {
-            /* here we need to think how to implement the board.
-               the board is a matrix of special characters ('X', 'O') so maybe
-               we need to use enum and the matrix will be only of type 'X' and 'O' or somthing .. */
-
-            // maybe array of chars and validate that onlu contain 'X' 'O' 
-
-            //todo: implement the matrix of chars where valid inputs are: {'X', 'O', ' ', 'Q', 'Z'}
-        }
-
-
-        public int BoardSize()
-        {
-            //make sure here to return the real size and not the multipication of the rows and cols
-            int size;
-
-            if (r_SizeOfBoard == eBoardSize.six)
+            for (int i = 0; i < m_SizeOfBoard; i++)
             {
-                size = 6;
-            }
-            else
-            {
-                if (r_SizeOfBoard == eBoardSize.eight)
+                for (int j = 0; j < m_SizeOfBoard; j++)
                 {
-                    size = 8;
-                }
-                else
-                {
-                    size = 10;
+                    r_Board[i, j] = new BoardCell();
                 }
             }
 
-            return size;
+            soldiersFirstPosition();
         }
 
 
-        public void MakeMove(string i_playerMove)
+
+        public void MakeMove(string i_playerMove) //TODO: implement this
         {
             // get a string like "Af>Bf"
             if (checkLegalMove())
@@ -73,9 +45,74 @@ namespace B22_Ex02
 
         }
 
-        private bool checkLegalMove()
+        private bool checkLegalMove() //TODO: implement this
         {
             return true;
+        }
+
+
+        public void ResetBoard()
+        {
+            foreach (BoardCell cell in r_Board)
+            {
+                cell.CellValue = eCellValue.Empty;
+            }
+
+            soldiersFirstPosition();
+        }
+
+
+        private void soldiersFirstPosition()
+        {
+            int heightDivider = (m_SizeOfBoard - 1) / 2;
+
+            for (int i = 0; i < heightDivider; i++) // player2 ( the 'O's)
+            {
+                for (int j = 0; j < m_SizeOfBoard; j++)
+                {
+                    if ((i % 2 == 0) && (j % 2 == 1))
+                    {
+                        r_Board[i, j].CellValue = eCellValue.Player2Soldier;
+                        m_player2SoldiersCounter++;
+                    }
+                    else
+                    {
+                        if ((i % 2 == 1) && (j % 2 == 0))
+                        {
+                            r_Board[i, j].CellValue = eCellValue.Player2Soldier;
+                            m_player2SoldiersCounter++;
+                        }
+                    }
+                }
+            }
+
+            for (int i = heightDivider + 2; i < m_SizeOfBoard; i++) // player1 ( the 'X's)
+            {
+                for (int j = 0; j < m_SizeOfBoard; j++)
+                {
+                    if ((i % 2 == 0) && (j % 2 == 1))
+                    {
+                        r_Board[i, j].CellValue = eCellValue.Player1Soldier;
+                        m_player1SoldiersCounter++;
+                    }
+                    else
+                    {
+                        if ((i % 2 == 1) && (j % 2 == 0))
+                        {
+                            r_Board[i, j].CellValue = eCellValue.Player1Soldier;
+                            m_player1SoldiersCounter++;
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
         }
     }
 }

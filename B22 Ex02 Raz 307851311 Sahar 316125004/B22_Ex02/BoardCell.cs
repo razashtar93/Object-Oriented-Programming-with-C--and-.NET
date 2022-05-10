@@ -18,5 +18,10 @@ namespace B22_Ex02
         {
             CellValue = eCellValue.Empty;
         }
+
+        public BoardCell(eCellValue i_cellValue)
+        {
+
+        }
     }
 }
