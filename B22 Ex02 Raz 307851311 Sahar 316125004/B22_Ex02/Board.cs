@@ -63,5 +63,19 @@ namespace B22_Ex02
         }
 
 
+        public void MakeMove(string i_playerMove)
+        {
+            // get a string like "Af>Bf"
+            if (checkLegalMove())
+            {
+                //converts the string to indexes and update the board (don't forget to print the Board again ..
+            }
+
+        }
+
+        private bool checkLegalMove()
+        {
+            return true;
+        }
     }
 }
