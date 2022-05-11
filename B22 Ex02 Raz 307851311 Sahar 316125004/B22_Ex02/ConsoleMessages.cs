@@ -37,11 +37,6 @@ namespace B22_Ex02
             Console.WriteLine("Please choose the size of the board: (6,8 or 10)");
         }
 
-        public static void PointsStatementMessege() // need to use this instead of PrintScore(Player i_Player1, Player i_Player2)
-        {
-            Console.WriteLine("The points are player one: {0} and player two: {1}");
-        }
-
         public static void PlayAgainMessege()
         {
             Console.WriteLine("Wanna play again? [y/n]");
@@ -62,11 +57,10 @@ namespace B22_Ex02
             Console.WriteLine("Congrats! {0} is won\n", i_Name);
         }
 
-        public static void DrawStatement() // or change here to "Its a Tie!" ...
+        public static void DrawStatement() 
         {
-            Console.WriteLine("It's a draw! No other legal moves");
+            Console.WriteLine("It's a Tie!");
         }
-
 
         public static void PrintScore(string i_Player1Name, int i_Player1Score, string i_Player2Name, int i_Player2Score)
         {
@@ -74,30 +68,27 @@ namespace B22_Ex02
                 i_Player1Name, i_Player1Score, i_Player2Name, i_Player2Score);  
         }
 
-
-
-
-        public static void PrintPlayerTurn(string i_playerName, int playerNumber)
+        public static void PrintPlayerTurn(string i_PlayerName, int i_PlayerNumber)
         {
-            if (playerNumber == 1)
+            if (i_PlayerNumber == 1)
             {
-                Console.WriteLine(i_playerName + " Turn (X) :");
+                Console.WriteLine(i_PlayerName + " Turn (X) :");
             }
             else
             {
-                Console.WriteLine(i_playerName + " Turn (O) :");
+                Console.WriteLine(i_PlayerName + " Turn (O) :");
             }
         }
 
-        public static void PrintPlayerMove(string i_playerMove, string i_playerName, int playerNumber)
+        public static void PrintPlayerMove(string i_PlayerMove, string i_PlayerName, int i_PlayerNumber)
         {
-            if (playerNumber == 1)
+            if (i_PlayerNumber == 1)
             {
-                Console.WriteLine(i_playerName + " move was (X) : " + i_playerMove);
+                Console.WriteLine(i_PlayerName + " move was (X) : " + i_PlayerMove);
             }
             else
             {
-                Console.WriteLine(i_playerName + " move was (O) : " + i_playerMove);
+                Console.WriteLine(i_PlayerName + " move was (O) : " + i_PlayerMove);
             }
         }
 
@@ -112,13 +103,5 @@ namespace B22_Ex02
         {
             Console.WriteLine("Thank You for Playing American Cheackers \n\nPress 'Enter' to exit");
         }
-
-
-        //// A base for a messega method
-        //public static void ()
-        //{
-        //    Console.WriteLine();
-        //}        
-
     }
 }

@@ -65,39 +65,35 @@ namespace B22_Ex02
             return userResponse;
         }
 
-
-
-
-        public static string GetUserMove(int i_borderSize, string i_userInput)
+        public static string GetUserMove(int i_BorderSize, string i_UserInput)
         {
-            // string userInput = Console.ReadLine();
-
-            while (!(Regex.IsMatch(i_userInput, "^[A-Z][a-z]>[A-Z][a-z]$")) && i_userInput != "Q" && i_userInput != "q")
+            while (!(Regex.IsMatch(i_UserInput, "^[A-Z][a-z]>[A-Z][a-z]$")) && i_UserInput != "Q" && i_UserInput != "q")
             {
                 ConsoleMessages.InValideInputeError();
-                i_userInput = Console.ReadLine();
+                i_UserInput = Console.ReadLine();
             }
 
-            if (i_userInput != "Q" && i_userInput != "q")
+            if (i_UserInput != "Q" && i_UserInput != "q")
             {
-                if (!checkMoveBordersAndFormat(i_userInput, i_borderSize))
+                if (!checkMoveBordersAndFormat(i_UserInput, i_BorderSize))
                 {
                     ConsoleMessages.InValideInputeError();
-                    i_userInput = Console.ReadLine();
-                    GetUserMove(i_borderSize, i_userInput);
+                    i_UserInput = Console.ReadLine();
+                    GetUserMove(i_BorderSize, i_UserInput);
                 }
             }
-            return i_userInput;
+
+            return i_UserInput;
         }
 
-        private static bool checkMoveBordersAndFormat(string i_playerMove, int i_borderSize)
+        private static bool checkMoveBordersAndFormat(string i_PlayerMove, int i_BorderSize)
         {
             bool isInBorders = true;
 
-            if (Regex.IsMatch(i_playerMove, "^[A-Z][a-z]>[A-Z][a-z]$"))
+            if (Regex.IsMatch(i_PlayerMove, "^[A-Z][a-z]>[A-Z][a-z]$"))
             {
-                if (i_playerMove[0] - 'A' > (i_borderSize - 1) || i_playerMove[1] - 'a' > (i_borderSize - 1) ||
-                                   i_playerMove[3] - 'A' > (i_borderSize - 1) || i_playerMove[4] - 'a' > (i_borderSize - 1))
+                if (i_PlayerMove[0] - 'A' > (i_BorderSize - 1) || i_PlayerMove[1] - 'a' > (i_BorderSize - 1) ||
+                                   i_PlayerMove[3] - 'A' > (i_BorderSize - 1) || i_PlayerMove[4] - 'a' > (i_BorderSize - 1))
                 {
                     isInBorders = false;
                 }
@@ -109,6 +105,5 @@ namespace B22_Ex02
 
             return isInBorders;
         }
-
     }
 }
