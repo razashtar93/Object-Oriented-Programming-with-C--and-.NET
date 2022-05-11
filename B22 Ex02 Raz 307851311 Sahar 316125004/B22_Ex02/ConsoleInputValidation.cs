@@ -83,6 +83,7 @@ namespace B22_Ex02
                 if (!checkMoveBordersAndFormat(i_userInput, i_borderSize))
                 {
                     ConsoleMessages.InValideInputeError();
+                    i_userInput = Console.ReadLine();
                     GetUserMove(i_borderSize, i_userInput);
                 }
             }
