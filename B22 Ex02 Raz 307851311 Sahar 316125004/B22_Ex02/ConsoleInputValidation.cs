@@ -80,7 +80,7 @@ namespace B22_Ex02
 
             if (i_userInput != "Q" && i_userInput != "q")
             {
-                if (!CheckMoveBordersAndFormat(i_userInput, i_borderSize))
+                if (!checkMoveBordersAndFormat(i_userInput, i_borderSize))
                 {
                     ConsoleMessages.InValideInputeError();
                     GetUserMove(i_borderSize, i_userInput);
@@ -89,7 +89,7 @@ namespace B22_Ex02
             return i_userInput;
         }
 
-            public static bool CheckMoveBordersAndFormat(string i_playerMove, int i_borderSize)
+        private static bool checkMoveBordersAndFormat(string i_playerMove, int i_borderSize)
         {
             bool isInBorders = true;
 
