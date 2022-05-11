@@ -16,8 +16,6 @@ namespace B22_Ex02
         public List<String> m_LeagalEatingMovesPlayer1 = new List<String>();
         public List<String> m_LeagalEatingMovesPlayer2 = new List<String>();
 
-
-
         public Board(int i_BoardSize) // constructor
         {
             m_SizeOfBoard = i_BoardSize;
@@ -74,8 +72,6 @@ namespace B22_Ex02
             eCellValue startCellValue = r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue;
             r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue = eCellValue.Empty;
 
-
-
             if (r_Board[(i_StartIndex[0] + i_targetIndex[0]) / 2, (i_StartIndex[1] + i_targetIndex[1]) / 2].CellValue == eCellValue.Player2King && (i_Player == 1))
             {
                 r_Board[(i_StartIndex[0] + i_targetIndex[0]) / 2, (i_StartIndex[1] + i_targetIndex[1]) / 2].CellValue = eCellValue.Empty;
@@ -121,8 +117,6 @@ namespace B22_Ex02
             UpdateAllPlayerLegalMoves();
         }
 
-
-
         public void MakeMove(string i_PlayerMove, int i_Player)
         {
             bool isLeagal = false;
@@ -130,10 +124,7 @@ namespace B22_Ex02
 
             while (!isLeagal)
             {
-                //int[] startingPosition = { playerMove[0] - 65, playerMove[1] - 97 };
                 int[] startingPosition = { playerMove[1] - 97, playerMove[0] - 65 };
-
-                //int[] targetPosition = { playerMove[3] - 65, playerMove[4] - 97 };
                 int[] targetPosition = { playerMove[4] - 97, playerMove[3] - 65 };
 
                 if (i_Player == 1)
@@ -171,106 +162,10 @@ namespace B22_Ex02
                         playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, " ");
                     }
                 }
+
                 UpdateAllPlayerLegalMoves();
-
-
             }
         }
-
-        //    if (i_Player == 1)
-        //    {
-        //        //Check if the player try to ,move his own solider
-        //        if ((r_Board[startingPosition[0], startingPosition[1]]).CellValue != eCellValue.Player1Soldier)
-        //        {
-        //            isLeagal = false;
-        //            playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
-        //        }
-
-        //        // Check if the player destination is empty
-        //        if ((r_Board[targetPosition[0], targetPosition[1]]).CellValue != eCellValue.Empty)
-        //        {
-        //            isLeagal = false;
-        //            playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
-        //        }
-
-        //        if ((targetPosition[0] == startingPosition[0] - 1 && targetPosition[1] == startingPosition[1] - 1) ||
-        //           (targetPosition[0] == startingPosition[0] - 1 && targetPosition[1] == startingPosition[1] + 1))
-        //        {
-        //            singleMove(startingPosition, targetPosition, i_Player);
-        //            isLeagal = true;
-        //            break;
-
-        //        }
-
-        //        // Eating left up
-        //        if ((targetPosition[0] == startingPosition[0] - 2 && targetPosition[1] == startingPosition[1] - 2) &&
-        //            (r_Board[startingPosition[0] - 1, startingPosition[1] - 1]).CellValue == eCellValue.Player2Soldier)
-        //        {
-        //            eatingMove(startingPosition, targetPosition, i_Player);
-        //            isLeagal = true;
-        //            break;
-        //        }
-
-        //        // Eating right up
-        //        if ((targetPosition[0] == startingPosition[0] - 2 && targetPosition[1] == startingPosition[1] + 2) &&
-        //            (r_Board[startingPosition[0] - 1, startingPosition[1] + 1]).CellValue == eCellValue.Player2Soldier)
-        //        {
-        //            eatingMove(startingPosition, targetPosition, i_Player);
-        //            isLeagal = true;
-        //            break;
-        //        }
-        //    }
-
-
-        //    if (i_Player == 2)
-        //    {
-        //        //Check if the player try to ,move his own solider
-        //        if ((r_Board[startingPosition[0], startingPosition[1]]).CellValue != eCellValue.Player2Soldier)
-        //        {
-        //            isLeagal = false;
-        //            playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
-        //        }
-
-        //        // Check if the player destination is empty
-        //        if ((r_Board[targetPosition[0], targetPosition[1]]).CellValue == eCellValue.Empty)
-        //        {
-        //            isLeagal = false;
-        //            playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
-        //        }
-
-        //        // Single move
-        //        if ((targetPosition[0] == startingPosition[0] + 1 && targetPosition[1] == startingPosition[1] - 1) ||
-        //           (targetPosition[0] == startingPosition[0] + 1 && targetPosition[1] == startingPosition[1] + 1))
-        //        {
-        //            singleMove(startingPosition, targetPosition, i_Player);
-        //            isLeagal = true;
-        //            break;
-
-        //        }
-
-        //        // Eating left down
-        //        if ((targetPosition[0] == startingPosition[0] + 2 && targetPosition[1] == startingPosition[1] - 2) &&
-        //            (r_Board[startingPosition[0] + 1, startingPosition[1] - 1]).CellValue == eCellValue.Player1Soldier)
-        //        {
-        //            eatingMove(startingPosition, targetPosition, i_Player);
-        //            isLeagal = true;
-        //            break;
-        //        }
-
-        //        // Eating right down
-        //        if ((targetPosition[0] == startingPosition[0] + 2 && targetPosition[1] == startingPosition[1] + 2) &&
-        //            (r_Board[startingPosition[0] + 1, startingPosition[1] + 1]).CellValue == eCellValue.Player1Soldier)
-        //        {
-        //            eatingMove(startingPosition, targetPosition, i_Player);
-        //            isLeagal = true;
-        //            break;
-        //        }
-        //    }
-
-        //    playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
-        //}
-        //}
-
 
         public void UpdateAllPlayerLegalMoves()
         {
@@ -300,7 +195,6 @@ namespace B22_Ex02
             }
         }
 
-
         public List<string> GetLegalEatingMovesFromCell(int i_Row, int i_Col, int i_Player)
         {
             char start_row_char = Convert.ToChar(i_Row + 97);
@@ -325,6 +219,7 @@ namespace B22_Ex02
                         leagalMovesFromIndexList.Add(leagalMove);
                     }
                 }
+
                 // up right eating
                 if ((i_Row - 2) >= 0 && (i_Col + 2) < m_SizeOfBoard)
                 {
@@ -371,7 +266,6 @@ namespace B22_Ex02
             if (i_Player == 2)
             {
                 // Down left eating
-
                 if ((i_Row + 2) < m_SizeOfBoard && (i_Col - 2) >= 0)
                 {
                     if (((r_Board[i_Row + 1, i_Col - 1]).CellValue == eCellValue.Player1King
@@ -399,7 +293,6 @@ namespace B22_Ex02
                     }
                 }
 
-
                 // up left eating king 2
                 if ((i_Row - 2) >= 0 && (i_Col - 2) >= 0 && r_Board[i_Row, i_Col].CellValue == eCellValue.Player2King)
                 {
@@ -413,6 +306,7 @@ namespace B22_Ex02
                         leagalMovesFromIndexList.Add(leagalMove);
                     }
                 }
+
                 // up right eating king 2
                 if ((i_Row - 2) >= 0 && (i_Col + 2) < m_SizeOfBoard && r_Board[i_Row, i_Col].CellValue == eCellValue.Player2King)
                 {
@@ -426,142 +320,10 @@ namespace B22_Ex02
                         leagalMovesFromIndexList.Add(leagalMove);
                     }
                 }
-
             }
 
             return leagalMovesFromIndexList;
         }
-
-        //public List<string> GetLegalEatingMovesFromCell(int i_Row, int i_Col, int i_Player)
-        //{
-        //    char start_row_char = Convert.ToChar(i_Row + 97);
-        //    char start_col_char = Convert.ToChar(i_Col + 65);
-        //    char target_row_char;
-        //    char target_col_char;
-        //    string leagalMove;
-        //    List<string> leagalMovesFromIndexList = new List<string>();
-
-        //    if (i_Player == 1)
-        //    {
-        //        // up left eating
-        //        if ((i_Row - 2) >= 0 && (i_Col - 2) >= 0)
-        //        {
-        //            if (((r_Board[i_Row - 1, i_Col - 1]).CellValue == eCellValue.Player2King
-        //                             || (r_Board[i_Row - 1, i_Col - 1]).CellValue == eCellValue.Player2Soldier) &&
-        //                             (r_Board[i_Row - 2, i_Col - 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row - 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col + -2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-        //        // up right eating
-        //        if ((i_Row - 2) >= 0 && (i_Col + 2) < m_SizeOfBoard)
-        //        {
-        //            if (((r_Board[i_Row - 1, i_Col + 1]).CellValue == eCellValue.Player2King
-        //                                 || (r_Board[i_Row - 1, i_Col + 1]).CellValue == eCellValue.Player2Soldier) &&
-        //                                 (r_Board[i_Row - 2, i_Col + 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row - 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col + +2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-
-        //        // Down left eating king player 1
-        //        if ((i_Row + 2) < m_SizeOfBoard && (i_Col - 2) >= 0)
-        //        {
-        //            if (((r_Board[i_Row + 1, i_Col - 1]).CellValue == eCellValue.Player2King
-        //                             || (r_Board[i_Row + 1, i_Col - 1]).CellValue == eCellValue.Player2Soldier) &&
-        //                             (r_Board[i_Row + 2, i_Col - 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row + 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col - 2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-
-        //        // Down right eating king 1
-        //        if ((i_Row + 2) < m_SizeOfBoard && (i_Col + 2) < m_SizeOfBoard)
-        //        {
-        //            if (((r_Board[i_Row + 1, i_Col + 1]).CellValue == eCellValue.Player2King
-        //                                     || (r_Board[i_Row + 1, i_Col + 1]).CellValue == eCellValue.Player2Soldier) &&
-        //                                     (r_Board[i_Row + 2, i_Col + 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row + 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col + 2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-        //    }
-
-        //    if (i_Player == 2)
-        //    {
-        //        // Down left eating
-
-        //        if ((i_Row + 2) < m_SizeOfBoard && (i_Col - 2) >= 0)
-        //        {
-        //            if (((r_Board[i_Row + 1, i_Col - 1]).CellValue == eCellValue.Player1King
-        //                             || (r_Board[i_Row + 1, i_Col - 1]).CellValue == eCellValue.Player1Soldier) &&
-        //                             (r_Board[i_Row + 2, i_Col - 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row + 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col - 2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-
-        //        // Down right eating
-        //        if ((i_Row + 2) < m_SizeOfBoard && (i_Col + 2) < m_SizeOfBoard)
-        //        {
-        //            if (((r_Board[i_Row + 1, i_Col + 1]).CellValue == eCellValue.Player1King
-        //                                     || (r_Board[i_Row + 1, i_Col + 1]).CellValue == eCellValue.Player1Soldier) &&
-        //                                     (r_Board[i_Row + 2, i_Col + 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row + 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col + 2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-
-
-        //        // up left eating king 2
-        //        if ((i_Row - 2) >= 0 && (i_Col - 2) >= 0)
-        //        {
-        //            if (((r_Board[i_Row - 1, i_Col - 1]).CellValue == eCellValue.Player1King
-        //                             || (r_Board[i_Row - 1, i_Col - 1]).CellValue == eCellValue.Player1Soldier) &&
-        //                             (r_Board[i_Row - 2, i_Col - 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row - 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col + -2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-        //        // up right eating king 2
-        //        if ((i_Row - 2) >= 0 && (i_Col + 2) < m_SizeOfBoard)
-        //        {
-        //            if (((r_Board[i_Row - 1, i_Col + 1]).CellValue == eCellValue.Player1King
-        //                                 || (r_Board[i_Row - 1, i_Col + 1]).CellValue == eCellValue.Player1Soldier) &&
-        //                                 (r_Board[i_Row - 2, i_Col + 2]).CellValue == eCellValue.Empty)
-        //            {
-        //                target_row_char = Convert.ToChar(i_Row - 2 + 97);
-        //                target_col_char = Convert.ToChar(i_Col + +2 + 65);
-        //                leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
-        //                leagalMovesFromIndexList.Add(leagalMove);
-        //            }
-        //        }
-
-        //    }
-
-        //    return leagalMovesFromIndexList;
-        //}
 
         public List<string> GetLegalSingleMovesFromCell(int i_Row, int i_Col, int i_Player)
         {
@@ -572,12 +334,9 @@ namespace B22_Ex02
             string leagalMove;
             List<string> leagalMovesFromIndexList = new List<string>();
 
-            //if (i_Player == 1 && r_Board[i_Row,i_Col].CellValue == eCellValue.Player1King || r_Board[i_Row, i_Col].CellValue == eCellValue.Player1Soldier)
             if (i_Player == 1 || (r_Board[i_Row, i_Col].CellValue == eCellValue.Player2King))
             {
-                //// if is a king move
-                //if(r_Board[i_Row - , i_Col])
-
+               
                 //up left
                 if ((i_Row - 1) >= 0 && (i_Col - 1) >= 0)
                 {
@@ -718,6 +477,5 @@ namespace B22_Ex02
         {
             return row >= 0 && row < m_SizeOfBoard && column >= 0 && column < m_SizeOfBoard;
         }
-
     }
 }
