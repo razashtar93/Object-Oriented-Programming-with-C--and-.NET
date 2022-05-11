@@ -54,7 +54,7 @@ namespace B22_Ex02
             }
 
             Console.WriteLine(board);
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }

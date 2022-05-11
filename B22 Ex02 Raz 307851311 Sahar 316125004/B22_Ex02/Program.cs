@@ -16,7 +16,7 @@ namespace B22_Ex02
             //===============================
             //create a board of char and think later how to change it
 
-            Board board = new Board(8);
+            //Board board = new Board(8);
             //int boardSize = board.GetLength(0);
 
 
@@ -38,8 +38,8 @@ namespace B22_Ex02
             //board[5, 5] = 'X';
 
 
-            VisualBoard.ShowBoard(board.GetBoard);
-
+            //VisualBoard.ShowBoard(board.GetBoard);
+            americanCheckers();
         }
 
 
@@ -49,6 +49,7 @@ namespace B22_Ex02
         private static void americanCheckers()
         {
             Game game = new Game();
+            game.Run();
             // game.playGame(); /  game.Run / or something else ..
         }
 
