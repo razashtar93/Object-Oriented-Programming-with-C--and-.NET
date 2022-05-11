@@ -101,6 +101,12 @@ namespace B22_Ex02
             }
         }
 
+        public static void HowToPlayMessage()
+        {
+            Console.WriteLine("In order to make a move,\n" +
+                "write as a string the starting cell then '>' and then the target cell.\n" +
+                "for example: De>Cd\n");
+        }
 
         public static void GoodByeMessage()
         {
