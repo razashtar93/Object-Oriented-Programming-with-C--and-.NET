@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B22_Ex02
 {
-    public class Board // all the logic of a board is placed here
+    public class Board // All the logic of the board and the rules is placed here
     {
         public int m_player1SoldiersCounter = 0;
         public int m_player2SoldiersCounter = 0;
@@ -62,11 +62,11 @@ namespace B22_Ex02
 
         private void eatingMove(int[] i_StartIndex, int[] i_targetIndex, int i_Player)
         {
-            
+
             eCellValue startCellValue = r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue;
             r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue = eCellValue.Empty;
-            
-            
+
+
 
             if (r_Board[(i_StartIndex[0] + i_targetIndex[0]) / 2, (i_StartIndex[1] + i_targetIndex[1]) / 2].CellValue == eCellValue.Player2King && (i_Player == 1))
             {
@@ -110,7 +110,6 @@ namespace B22_Ex02
                 r_Board[i_targetIndex[0], i_targetIndex[1]].CellValue = startCellValue;
             }
         }
-
 
 
 
@@ -160,7 +159,7 @@ namespace B22_Ex02
                 //    // recursion call here we eat
                 //}
 
-                
+
                 isPlayerCanToEat = upRightEatingMove || upLeftEatingMove;
 
                 return isPlayerCanToEat;
@@ -209,22 +208,19 @@ namespace B22_Ex02
 
 
 
-
-
-
-        public void MakeMove(string i_playerMove, int i_Player) //TODO: implement this
+        public void MakeMove(string i_playerMove, int i_Player) //TODO: check this
         {
             bool isLeagal = false;
             string playerMove = i_playerMove;
 
             while (!isLeagal)
             {
-               
+
                 //int[] startingPosition = { playerMove[0] - 65, playerMove[1] - 97 };
-                int[] startingPosition = {  playerMove[1] - 97, playerMove[0] - 65 };
+                int[] startingPosition = { playerMove[1] - 97, playerMove[0] - 65 };
 
                 //int[] targetPosition = { playerMove[3] - 65, playerMove[4] - 97 };
-                int[] targetPosition = { playerMove[4] - 97 , playerMove[3] - 65 };
+                int[] targetPosition = { playerMove[4] - 97, playerMove[3] - 65 };
 
 
                 if (i_Player == 1)
@@ -243,13 +239,13 @@ namespace B22_Ex02
                         playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
                     }
 
-                    if((targetPosition[0] == startingPosition[0] - 1 && targetPosition[1] == startingPosition[1] - 1) ||
+                    if ((targetPosition[0] == startingPosition[0] - 1 && targetPosition[1] == startingPosition[1] - 1) ||
                        (targetPosition[0] == startingPosition[0] - 1 && targetPosition[1] == startingPosition[1] + 1))
                     {
                         singleMove(startingPosition, targetPosition, i_Player);
                         isLeagal = true;
                         break;
-                        
+
                     }
 
                     // Eating left up
@@ -324,6 +320,101 @@ namespace B22_Ex02
 
 
 
+        /* this will be done when GetLegalMovesFromCell() will be done */
+        public List<string> GetAllPlayerLegalMoves(int i_Player) 
+        {
+            List<string> listToReturn = new List<string>();
+
+            if (i_Player == 1)
+            {
+                for (int i = 0; i < m_SizeOfBoard; i++)
+                {
+                    for (int j = 0; j < m_SizeOfBoard; j++)
+                    {
+                        if (r_Board[i, j].CellValue == eCellValue.Player1Soldier
+                            || r_Board[i, j].CellValue == eCellValue.Player1King)
+                        {
+                            listToReturn.AddRange(GetLegalMovesFromCell(i, j));
+                        }
+                    }
+                }
+            }
+            else // player2
+            {
+                for (int i = 0; i < m_SizeOfBoard; i++)
+                {
+                    for (int j = 0; j < m_SizeOfBoard; j++)
+                    {
+                        if (r_Board[i, j].CellValue == eCellValue.Player2Soldier
+                            || r_Board[i, j].CellValue == eCellValue.Player2King)
+                        {
+                            listToReturn.AddRange(GetLegalMovesFromCell(i, j));
+                        }
+                    }
+                }
+            }
+
+            return listToReturn;
+        }
+
+
+
+
+        public List<string> GetLegalMovesFromCell(int i_row, int i_col) // Sahar implement this
+        {
+            List<string> list = new List<string>();
+
+            return list;
+        }
+
+        // TODO: you can delete the following comment !!
+        /*  public List<int[]> GetLegalMovesFromCell2(int i_row, int i_col)
+          {
+              List<int[]> list = new List<int[]>(); // contains al the allowed moves ..
+
+
+              switch (r_Board[i_row, i_col].CellValue)
+              {
+                  case eCellValue.Player1Soldier:
+                      // can eat only up left or right   
+
+                      break;
+
+                  case eCellValue.Player2Soldier:
+                      break;
+
+                  case eCellValue.Player1King:
+                      break;
+
+                  case eCellValue.Player2King:
+                      break;
+              }
+
+              if (r_Board[i_row, i_col].CellValue == eCellValue.Player1Soldier)
+              {
+
+              }
+
+              if (r_Board[i_row, i_col].CellValue == eCellValue.Player2Soldier)
+              {
+
+              }
+
+              if (r_Board[i_row, i_col].CellValue == eCellValue.Player1King)
+              {
+
+              }
+
+              if (r_Board[i_row, i_col].CellValue == eCellValue.Player2King)
+              {
+
+              }
+
+              return list;
+          } */
+
+
+
         public void ResetBoard()
         {
             foreach (BoardCell cell in r_Board)
@@ -385,14 +476,14 @@ namespace B22_Ex02
         {
             bool isWon = false;
             int scoreToAdd;
+
             if (m_player1SoldiersCounter == 0)
             {
                 isWon = true;
                 ConsoleMessages.PlayerWinningMessage(i_player2.Name);
-                //calculate player score
                 scoreToAdd = Math.Abs(i_player1.Score - i_player2.Score);
                 i_player2.Score = scoreToAdd;
-                ConsoleMessages.PrintScore(i_player1, i_player2);
+                ConsoleMessages.PrintScore(i_player1.Name, i_player1.Score, i_player2.Name, i_player2.Score);
             }
 
             if (m_player2SoldiersCounter == 0)
@@ -401,14 +492,14 @@ namespace B22_Ex02
                 ConsoleMessages.PlayerWinningMessage(i_player1.Name);
                 scoreToAdd = Math.Abs(i_player1.Score - i_player2.Score);
                 i_player1.Score = scoreToAdd;
-                ConsoleMessages.PrintScore(i_player1, i_player2);
+                ConsoleMessages.PrintScore(i_player1.Name, i_player1.Score, i_player2.Name, i_player2.Score);
             }
 
             return isWon;
         }
 
-        public bool ifIndexOutOfBounds(int row, int column)
-        { 
+        public bool IfIndexOutOfBounds(int row, int column)
+        {
             return row >= 0 && row < m_SizeOfBoard && column >= 0 && column < m_SizeOfBoard;
         }
 

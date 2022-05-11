@@ -7,15 +7,9 @@ namespace B22_Ex02
 {
     public class VisualBoard
     {
-        // need to change to:
-        //get board of Boardcell 
-        //in each boardcell check the type and print the relevant value (meaning 'O' or 'X' or 'Q' or 'Z')
-
         public static void ShowBoard(BoardCell[,] i_BoardGame)
         {
             int boardSize = i_BoardGame.GetLength(0);
-            // char[] rowUpperLetter = new char[10] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
-            //char[] rowLowerLetter = new char[10] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
             string lineDivider = " ";
 
             for (int i = 0; i < boardSize; i++)
@@ -38,7 +32,6 @@ namespace B22_Ex02
             board.Append(lineDivider);
             board.AppendLine();
 
-
             for (int i = 0; i < boardSize; i++)
             {
                 board.AppendFormat("{0}|", Convert.ToChar('a' + i));
@@ -54,7 +47,6 @@ namespace B22_Ex02
             }
 
             Console.WriteLine(board);
-            //Console.ReadLine();
         }
     }
 }
