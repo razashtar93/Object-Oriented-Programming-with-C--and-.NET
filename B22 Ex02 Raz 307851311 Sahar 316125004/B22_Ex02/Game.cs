@@ -18,13 +18,13 @@ namespace B22_Ex02
         private const int k_SignOfPlayer2 = 2;
         private Random m_Rand;
 
-        public Game() // Done.
+        public Game()
         {
             v_GameAlive = true;
             InitGame();
         }
 
-        public void InitGame() // Done.
+        public void InitGame()
         {
             ConsoleMessages.OpenStatement();
 
@@ -37,7 +37,6 @@ namespace B22_Ex02
 
             int opponentChoise = ConsoleInputValidation.GetOpponentChoise();
 
-
             if (opponentChoise == 1)
             {
                 m_Player2 = new Player("Computer");
@@ -48,11 +47,11 @@ namespace B22_Ex02
                 m_Player2 = new Player(ConsoleInputValidation.GetPlayerName());
                 v_PlayerVsPlayerMode = true;
             }
+
             ConsoleMessages.LetsPlay();
         }
 
-
-        public void Run() // Done.
+        public void Run()
         {
             bool playerWantToQuit = false;
             VisualBoard.ShowBoard(m_Board);
@@ -65,6 +64,7 @@ namespace B22_Ex02
                 VisualBoard.ShowBoard(m_Board);
                 ConsoleMessages.PrintPlayerMove(m_UserInput, m_Player1.Name, k_SignOfPlayer1);
                 ConsoleMessages.PrintPlayerTurn(m_Player2.Name, k_SignOfPlayer2);
+
                 if (isWonOrDraw(m_Player1, m_Player2) || playerWantToQuit)
                 {
                     break;
@@ -74,6 +74,7 @@ namespace B22_Ex02
                 VisualBoard.ShowBoard(m_Board);
                 ConsoleMessages.PrintPlayerMove(m_UserInput, m_Player2.Name, k_SignOfPlayer2);
                 ConsoleMessages.PrintPlayerTurn(m_Player1.Name, k_SignOfPlayer1);
+
                 if (isWonOrDraw(m_Player1, m_Player2) || playerWantToQuit)
                 {
                     break;
@@ -82,18 +83,16 @@ namespace B22_Ex02
 
             if (playAgain())
             {
-                ResetGame();
+                resetGame();
                 Run();
             }
             else
             {
-                EndGame();
+                endGame();
             }
-
         }
 
-
-        private bool playerOneMove() // Done.
+        private bool playerOneMove() 
         {
             bool playerWantToQuit = false;
             string userInput = Console.ReadLine();
@@ -110,10 +109,9 @@ namespace B22_Ex02
             }
 
             return playerWantToQuit;
-
         }
 
-        private bool isWonOrDraw(Player i_Player1, Player i_Player2) //Done.
+        private bool isWonOrDraw(Player i_Player1, Player i_Player2) 
         {
             bool answer = false;
 
@@ -136,14 +134,12 @@ namespace B22_Ex02
             return answer;
         }
 
-
-        private bool playerTwoMove() //TODO: when computer play take the lists
+        private bool playerTwoMove() 
         {
             bool playerWantToQuit = false;
 
             if (!v_PlayerVsPlayerMode) // play against the computer
             {
-
                 if (m_GameBoard.m_LeagalEatingMovesPlayer2.Any()) // if not empty
                 {
                     int itemIndex = m_Rand.Next(m_GameBoard.m_LeagalEatingMovesPlayer2.Count);
@@ -167,8 +163,6 @@ namespace B22_Ex02
                     }
                 }
             }
-
-
             else
             {
                 string userInput = Console.ReadLine();
@@ -188,24 +182,20 @@ namespace B22_Ex02
             return playerWantToQuit;
         }
 
-
-        public void ResetGame() // change to private.
+        private void resetGame()
         { // reset the game for another play
             m_GameBoard.ResetBoard();
             v_GameAlive = true;
-
         }
 
-
-        private void EndGame() // change to private.
+        private void endGame() 
         {
             v_GameAlive = false;
             ConsoleMessages.GoodByeMessage();
             Console.ReadLine();
         }
 
-
-        private bool playAgain() // Done.
+        private bool playAgain() 
         {
             string userResponseForPlayAgain = ConsoleInputValidation.GetUserResponseForPlayAgaine();
             bool userAnswer;
@@ -222,9 +212,7 @@ namespace B22_Ex02
             return userAnswer;
         }
 
-
-
-        private void playerWantsToQuit(int i_Player) // Done.
+        private void playerWantsToQuit(int i_Player) 
         {
             // update player soldier to zero and call IsWon()
             if (i_Player == k_SignOfPlayer1)

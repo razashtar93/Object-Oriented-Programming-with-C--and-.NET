@@ -46,12 +46,14 @@ namespace B22_Ex02
             eCellValue startCellValue = r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue;
             r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue = eCellValue.Empty;
 
+            // Make a king for player 1
             if (i_Player == 1 & i_targetIndex[0] == 0)
             {
                 r_Board[i_targetIndex[0], i_targetIndex[1]].CellValue = eCellValue.Player1King;
                 m_Player1SoldiersCounter += 3;
             }
 
+            // Make a king for player 2
             else if (i_Player == 2 & i_targetIndex[0] == m_SizeOfBoard - 1)
             {
                 r_Board[i_targetIndex[0], i_targetIndex[1]].CellValue = eCellValue.Player2King;
@@ -375,7 +377,6 @@ namespace B22_Ex02
             }
         }
 
-
         public List<string> GetLegalEatingMovesFromCell(int i_Row, int i_Col, int i_Player)
         {
             char start_row_char = Convert.ToChar(i_Row + 97);
@@ -413,12 +414,34 @@ namespace B22_Ex02
                         leagalMovesFromIndexList.Add(leagalMove);
                     }
                 }
-                // KING
-                //if(r_Board[i_Row, i_Col].CellValue == eCellValue.Player1King)
-                //{
 
-                //}
+                // Down left eating king player 1
+                if ((i_Row + 2) < m_SizeOfBoard && (i_Col - 2) >= 0)
+                {
+                    if (((r_Board[i_Row + 1, i_Col - 1]).CellValue == eCellValue.Player2King
+                                     || (r_Board[i_Row + 1, i_Col - 1]).CellValue == eCellValue.Player2Soldier) &&
+                                     (r_Board[i_Row + 2, i_Col - 2]).CellValue == eCellValue.Empty)
+                    {
+                        target_row_char = Convert.ToChar(i_Row + 2 + 97);
+                        target_col_char = Convert.ToChar(i_Col - 2 + 65);
+                        leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
+                        leagalMovesFromIndexList.Add(leagalMove);
+                    }
+                }
 
+                // Down right eating king 1
+                if ((i_Row + 2) < m_SizeOfBoard && (i_Col + 2) < m_SizeOfBoard)
+                {
+                    if (((r_Board[i_Row + 1, i_Col + 1]).CellValue == eCellValue.Player2King
+                                             || (r_Board[i_Row + 1, i_Col + 1]).CellValue == eCellValue.Player2Soldier) &&
+                                             (r_Board[i_Row + 2, i_Col + 2]).CellValue == eCellValue.Empty)
+                    {
+                        target_row_char = Convert.ToChar(i_Row + 2 + 97);
+                        target_col_char = Convert.ToChar(i_Col + 2 + 65);
+                        leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
+                        leagalMovesFromIndexList.Add(leagalMove);
+                    }
+                }
             }
 
             if (i_Player == 2)
@@ -452,11 +475,34 @@ namespace B22_Ex02
                     }
                 }
 
-                //// KING
-                //if (r_Board[i_Row, i_Col].CellValue == eCellValue.Player1King)
-                //{
 
-                //}
+                // up left eating king 2
+                if ((i_Row - 2) >= 0 && (i_Col - 2) >= 0)
+                {
+                    if (((r_Board[i_Row - 1, i_Col - 1]).CellValue == eCellValue.Player1King
+                                     || (r_Board[i_Row - 1, i_Col - 1]).CellValue == eCellValue.Player1Soldier) &&
+                                     (r_Board[i_Row - 2, i_Col - 2]).CellValue == eCellValue.Empty)
+                    {
+                        target_row_char = Convert.ToChar(i_Row - 2 + 97);
+                        target_col_char = Convert.ToChar(i_Col + -2 + 65);
+                        leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
+                        leagalMovesFromIndexList.Add(leagalMove);
+                    }
+                }
+                // up right eating king 2
+                if ((i_Row - 2) >= 0 && (i_Col + 2) < m_SizeOfBoard)
+                {
+                    if (((r_Board[i_Row - 1, i_Col + 1]).CellValue == eCellValue.Player1King
+                                         || (r_Board[i_Row - 1, i_Col + 1]).CellValue == eCellValue.Player1Soldier) &&
+                                         (r_Board[i_Row - 2, i_Col + 2]).CellValue == eCellValue.Empty)
+                    {
+                        target_row_char = Convert.ToChar(i_Row - 2 + 97);
+                        target_col_char = Convert.ToChar(i_Col + +2 + 65);
+                        leagalMove = "" + start_col_char + start_row_char + '>' + target_col_char + target_row_char;
+                        leagalMovesFromIndexList.Add(leagalMove);
+                    }
+                }
+
             }
 
             return leagalMovesFromIndexList;
@@ -472,8 +518,11 @@ namespace B22_Ex02
             List<string> leagalMovesFromIndexList = new List<string>();
 
             //if (i_Player == 1 && r_Board[i_Row,i_Col].CellValue == eCellValue.Player1King || r_Board[i_Row, i_Col].CellValue == eCellValue.Player1Soldier)
-            if (i_Player == 1)
+            if (i_Player == 1 || (r_Board[i_Row, i_Col].CellValue == eCellValue.Player2King))
             {
+                //// if is a king move
+                //if(r_Board[i_Row - , i_Col])
+
                 //up left
                 if ((i_Row - 1) >= 0 && (i_Col - 1) >= 0)
                 {
@@ -499,7 +548,7 @@ namespace B22_Ex02
                 }
             }
 
-            if (i_Player == 2)
+            if (i_Player == 2 || (r_Board[i_Row, i_Col].CellValue == eCellValue.Player1King))
             {
                 //Down left
                 if ((i_Row + 1) < m_SizeOfBoard && (i_Col - 1) >= 0)
