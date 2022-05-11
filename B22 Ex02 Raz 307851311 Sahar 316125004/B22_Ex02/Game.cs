@@ -56,6 +56,7 @@ namespace B22_Ex02
         {
             bool playerWantToQuit = false;
             VisualBoard.ShowBoard(m_Board);
+            ConsoleMessages.HowToPlayMessage();
             ConsoleMessages.PrintPlayerTurn(m_player1.Name, k_SignOfPlayer1);
 
             while (v_GameAlive)
