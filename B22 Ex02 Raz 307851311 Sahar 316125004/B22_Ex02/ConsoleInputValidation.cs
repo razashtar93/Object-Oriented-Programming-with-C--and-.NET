@@ -68,29 +68,28 @@ namespace B22_Ex02
 
 
 
-        public static string GetUserMove(int i_borderSize)
+        public static string GetUserMove(int i_borderSize, string i_userInput)
         {
-            string userInput = Console.ReadLine();
+            // string userInput = Console.ReadLine();
 
-            while (!(Regex.IsMatch(userInput, "^[A-Z][a-z]>[A-Z][a-z]$")) && userInput != "Q" && userInput != "q")
+            while (!(Regex.IsMatch(i_userInput, "^[A-Z][a-z]>[A-Z][a-z]$")) && i_userInput != "Q" && i_userInput != "q")
             {
                 ConsoleMessages.InValideInputeError();
-                userInput = Console.ReadLine();
+                i_userInput = Console.ReadLine();
             }
 
-            if (userInput != "Q" && userInput != "q")
+            if (i_userInput != "Q" && i_userInput != "q")
             {
-                if (!CheckMoveBordersAndFormat(userInput, i_borderSize))
+                if (!CheckMoveBordersAndFormat(i_userInput, i_borderSize))
                 {
                     ConsoleMessages.InValideInputeError();
-                    GetUserMove(i_borderSize);
+                    GetUserMove(i_borderSize, i_userInput);
                 }
             }
-
-            return userInput;
+            return i_userInput;
         }
 
-        public static bool CheckMoveBordersAndFormat(string i_playerMove, int i_borderSize)
+            public static bool CheckMoveBordersAndFormat(string i_playerMove, int i_borderSize)
         {
             bool isInBorders = true;
 

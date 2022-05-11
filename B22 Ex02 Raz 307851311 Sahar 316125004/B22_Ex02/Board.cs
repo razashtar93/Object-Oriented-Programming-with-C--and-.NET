@@ -39,7 +39,7 @@ namespace B22_Ex02
 
         private void singleMove(int[] i_StartIndex, int[] i_targetIndex, int i_Player)
         {
-            BoardCell startCellValue = r_Board[i_StartIndex[0], i_StartIndex[1]];
+            eCellValue startCellValue = r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue;
             r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue = eCellValue.Empty;
 
             if (i_Player == 1 & i_targetIndex[0] == 0)
@@ -56,14 +56,14 @@ namespace B22_Ex02
 
             else
             {
-                r_Board[i_targetIndex[0], i_targetIndex[1]] = startCellValue;
+                r_Board[i_targetIndex[0], i_targetIndex[1]].CellValue = startCellValue;
             }
         }
 
         private void eatingMove(int[] i_StartIndex, int[] i_targetIndex, int i_Player)
         {
             
-            BoardCell startCellValue = r_Board[i_StartIndex[0], i_StartIndex[1]];
+            eCellValue startCellValue = r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue;
             r_Board[i_StartIndex[0], i_StartIndex[1]].CellValue = eCellValue.Empty;
             
             
@@ -107,7 +107,7 @@ namespace B22_Ex02
 
             else
             {
-                r_Board[i_targetIndex[0], i_targetIndex[1]] = startCellValue;
+                r_Board[i_targetIndex[0], i_targetIndex[1]].CellValue = startCellValue;
             }
         }
 
@@ -214,15 +214,17 @@ namespace B22_Ex02
 
         public void MakeMove(string i_playerMove, int i_Player) //TODO: implement this
         {
-            bool isLeagal = true;
+            bool isLeagal = false;
             string playerMove = i_playerMove;
 
             while (!isLeagal)
             {
                
-                int[] startingPosition = { playerMove[0] - 65, playerMove[1] - 97 };
-                int[] targetPosition = { playerMove[3] - 65, playerMove[4] - 97 };
+                //int[] startingPosition = { playerMove[0] - 65, playerMove[1] - 97 };
+                int[] startingPosition = {  playerMove[1] - 97, playerMove[0] - 65 };
 
+                //int[] targetPosition = { playerMove[3] - 65, playerMove[4] - 97 };
+                int[] targetPosition = { playerMove[4] - 97 , playerMove[3] - 65 };
 
 
                 if (i_Player == 1)
@@ -231,16 +233,14 @@ namespace B22_Ex02
                     if ((r_Board[startingPosition[0], startingPosition[1]]).CellValue != eCellValue.Player1Soldier)
                     {
                         isLeagal = false;
-                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard);
-                        continue;
+                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
                     }
 
                     // Check if the player destination is empty
-                    if ((r_Board[targetPosition[0], targetPosition[1]]).CellValue == eCellValue.Empty)
+                    if ((r_Board[targetPosition[0], targetPosition[1]]).CellValue != eCellValue.Empty)
                     {
                         isLeagal = false;
-                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard);
-                        continue;
+                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
                     }
 
                     if((targetPosition[0] == startingPosition[0] - 1 && targetPosition[1] == startingPosition[1] - 1) ||
@@ -254,7 +254,7 @@ namespace B22_Ex02
 
                     // Eating left up
                     if ((targetPosition[0] == startingPosition[0] - 2 && targetPosition[1] == startingPosition[1] - 2) &&
-                        (r_Board[startingPosition[0] - 1, startingPosition[1] - 1]).CellValue == eCellValue.Empty)
+                        (r_Board[startingPosition[0] - 1, startingPosition[1] - 1]).CellValue == eCellValue.Player2Soldier)
                     {
                         eatingMove(startingPosition, targetPosition, i_Player);
                         isLeagal = true;
@@ -263,7 +263,7 @@ namespace B22_Ex02
 
                     // Eating right up
                     if ((targetPosition[0] == startingPosition[0] - 2 && targetPosition[1] == startingPosition[1] + 2) &&
-                        (r_Board[startingPosition[0] - 1, startingPosition[1] + 1]).CellValue == eCellValue.Empty)
+                        (r_Board[startingPosition[0] - 1, startingPosition[1] + 1]).CellValue == eCellValue.Player2Soldier)
                     {
                         eatingMove(startingPosition, targetPosition, i_Player);
                         isLeagal = true;
@@ -278,16 +278,14 @@ namespace B22_Ex02
                     if ((r_Board[startingPosition[0], startingPosition[1]]).CellValue != eCellValue.Player2Soldier)
                     {
                         isLeagal = false;
-                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard);
-                        continue;
+                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
                     }
 
                     // Check if the player destination is empty
                     if ((r_Board[targetPosition[0], targetPosition[1]]).CellValue == eCellValue.Empty)
                     {
                         isLeagal = false;
-                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard);
-                        continue;
+                        playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
                     }
 
                     // Single move
@@ -302,7 +300,7 @@ namespace B22_Ex02
 
                     // Eating left down
                     if ((targetPosition[0] == startingPosition[0] + 2 && targetPosition[1] == startingPosition[1] - 2) &&
-                        (r_Board[startingPosition[0] + 1, startingPosition[1] - 1]).CellValue == eCellValue.Empty)
+                        (r_Board[startingPosition[0] + 1, startingPosition[1] - 1]).CellValue == eCellValue.Player1Soldier)
                     {
                         eatingMove(startingPosition, targetPosition, i_Player);
                         isLeagal = true;
@@ -311,14 +309,15 @@ namespace B22_Ex02
 
                     // Eating right down
                     if ((targetPosition[0] == startingPosition[0] + 2 && targetPosition[1] == startingPosition[1] + 2) &&
-                        (r_Board[startingPosition[0] + 1, startingPosition[1] + 1]).CellValue == eCellValue.Empty)
+                        (r_Board[startingPosition[0] + 1, startingPosition[1] + 1]).CellValue == eCellValue.Player1Soldier)
                     {
                         eatingMove(startingPosition, targetPosition, i_Player);
                         isLeagal = true;
                         break;
                     }
                 }
-                playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard);
+
+                playerMove = ConsoleInputValidation.GetUserMove(m_SizeOfBoard, i_playerMove);
             }
         }
 

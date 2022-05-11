@@ -92,14 +92,16 @@ namespace B22_Ex02
 
         private void playerOneMove() //TODO: Implement this
         {
-            m_userInput = ConsoleInputValidation.GetUserMove(m_boardSize);
+
+            string userInput = Console.ReadLine();
+            m_userInput = ConsoleInputValidation.GetUserMove(m_boardSize, userInput);
 
             if (m_userInput == "q" && m_userInput == "Q")
             {
-                playerWantsToQuit(m_player1); // update score
+                playerWantsToQuit(m_player1);
             }
 
-            m_GameBoard.MakeMove(m_userInput, 1); //where 1 is for player 1 and 2 is for player 2
+            m_GameBoard.MakeMove(m_userInput, k_SignOfPlayer1);
 
         }
 
@@ -134,14 +136,15 @@ namespace B22_Ex02
             }
             else
             {
-                m_userInput = ConsoleInputValidation.GetUserMove(m_boardSize);
+                string userInput = Console.ReadLine();
+                m_userInput = ConsoleInputValidation.GetUserMove(m_boardSize, userInput);
 
                 if (m_userInput == "q" && m_userInput == "Q")
                 {
-                    playerWantsToQuit(m_player2); // update score
+                    playerWantsToQuit(m_player2);
                 }
 
-                m_GameBoard.MakeMove(m_userInput, 2); //where 1 is for player 1 and 2 is for player 2
+                m_GameBoard.MakeMove(m_userInput, k_SignOfPlayer2);
 
             }
 
@@ -187,7 +190,8 @@ namespace B22_Ex02
 
         private void playerWantsToQuit(Player player) // quit the game
         {
-            // print something to console (maybe score)
+            // update player soldier to zero and call isWon()
+
             //maybe ask if start new game or end for good
             // EndGame();
         }
