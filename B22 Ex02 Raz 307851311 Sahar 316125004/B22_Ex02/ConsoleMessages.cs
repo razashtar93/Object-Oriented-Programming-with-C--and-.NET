@@ -102,6 +102,12 @@ namespace B22_Ex02
         }
 
 
+        public static void GoodByeMessage()
+        {
+            Console.WriteLine("Thank You for Playing American Cheackers \n\nPress 'Enter' to exit");
+        }
+
+
         //// A base for a messega method
         //public static void ()
         //{

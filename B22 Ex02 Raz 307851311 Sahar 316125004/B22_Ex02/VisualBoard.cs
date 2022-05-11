@@ -38,7 +38,7 @@ namespace B22_Ex02
 
                 for (int j = 0; j < boardSize; j++)
                 {
-                    board.AppendFormat(" {0} |", ((char)i_BoardGame[i, j].CellValue)); // check this
+                    board.AppendFormat(" {0} |", ((char)i_BoardGame[i, j].CellValue)); 
                 }
 
                 board.AppendLine();
