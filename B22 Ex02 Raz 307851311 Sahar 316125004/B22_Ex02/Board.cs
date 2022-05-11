@@ -621,7 +621,7 @@ namespace B22_Ex02
             {
                 isWon = true;
                 ConsoleMessages.PlayerWinningMessage(i_player2.Name);
-                scoreToAdd = Math.Abs(i_player1.Score - i_player2.Score);
+                scoreToAdd = Math.Abs(m_player2SoldiersCounter - m_player1SoldiersCounter);
                 i_player2.Score = scoreToAdd;
                 ConsoleMessages.PrintScore(i_player1.Name, i_player1.Score, i_player2.Name, i_player2.Score);
             }
@@ -630,7 +630,7 @@ namespace B22_Ex02
             {
                 isWon = true;
                 ConsoleMessages.PlayerWinningMessage(i_player1.Name);
-                scoreToAdd = Math.Abs(i_player1.Score - i_player2.Score);
+                scoreToAdd = Math.Abs(m_player2SoldiersCounter - m_player1SoldiersCounter);
                 i_player1.Score = scoreToAdd;
                 ConsoleMessages.PrintScore(i_player1.Name, i_player1.Score, i_player2.Name, i_player2.Score);
             }
