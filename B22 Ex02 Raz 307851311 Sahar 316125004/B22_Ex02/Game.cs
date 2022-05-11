@@ -147,7 +147,8 @@ namespace B22_Ex02
                 {
                     int itemIndex = m_Rand.Next(listOfPlayer2Moves.Count);
                     string computerMove = listOfPlayer2Moves[itemIndex];
-                    m_GameBoard.MakeMove(computerMove, k_SignOfPlayer2);
+                    m_userInput = computerMove;
+                    m_GameBoard.MakeMove(m_userInput, k_SignOfPlayer2);
                 }
                 else
                 { // no legal move then computer want to quit => player1 won
