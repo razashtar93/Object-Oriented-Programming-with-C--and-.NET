@@ -7,5 +7,15 @@ namespace Ex03.ConsoleUI
 {
     class Program
     {
+        public static void Main()
+        {
+            openGarage();
+        }
+
+        private static void openGarage()
+        {
+           // Game game = new Game();
+           // game.Run();
+        }
     }
 }
