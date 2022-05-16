@@ -34,5 +34,24 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Garage\eVehicleStatus.cs" />
+    <Compile Include="Garage\Garage.cs" />
+    <Compile Include="Garage\ValueOutOfRangeException.cs" />
+    <Compile Include="Garage\VehicleGenerator.cs" />
+    <Compile Include="Vehicles\Car\Car.cs" />
+    <Compile Include="Vehicles\Car\eColor.cs" />
+    <Compile Include="Vehicles\Car\eNumberOfDoors.cs" />
+    <Compile Include="Vehicles\Motorcycle\eLicenceType.cs" />
+    <Compile Include="Vehicles\Motorcycle\Motorcycle.cs" />
+    <Compile Include="Vehicles\PowerSources\eFuelType.cs" />
+    <Compile Include="Vehicles\PowerSources\ElectricPowerSource.cs" />
+    <Compile Include="Vehicles\PowerSources\FuelPowerSource.cs" />
+    <Compile Include="Vehicles\PowerSources\PowerSource.cs" />
+    <Compile Include="Vehicles\Truck\Truck.cs" />
+    <Compile Include="Vehicles\Vehicle.cs" />
+    <Compile Include="Vehicles\Wheel.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
