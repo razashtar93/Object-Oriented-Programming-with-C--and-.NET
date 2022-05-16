@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ex03.GarageLogic.Vehicles.PowerSource
+namespace Ex03.GarageLogic
 {
-    public abstract class PowerSource // Done. (don't forget to delete this befor submission!!!!!!)
+    public abstract class PowerSource // Done. 
     {
         private readonly float r_MaxEnergy;
         private float m_CurrentEnergy;

@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ex03.GarageLogic.Vehicles;
-using Ex03.GarageLogic.Vehicles.Car;
-using Ex03.GarageLogic.Vehicles.Motorcycle;
-using Ex03.GarageLogic.Vehicles.PowerSource;
-using Ex03.GarageLogic.Vehicles.Truck;
+//using Ex03.GarageLogic.Vehicles;
+//using Ex03.GarageLogic.Vehicles.Car;
+//using Ex03.GarageLogic.Vehicles.Motorcycle;
+//using Ex03.GarageLogic.Vehicles.PowerSource;
+//using Ex03.GarageLogic.Vehicles.Truck;
 
-namespace Ex03.GarageLogic.Garage
+namespace Ex03.GarageLogic
 {
     public class VehicleGenerator
     {
+        public enum eVehicleType // when we want to add another type of vehicle we add the type here
+        {
+            FuelMotorcycle,
+            ElectricMotorcycle,
+            FualCar,
+            ElectricCar,
+            Truck
+        }
+
+
         private const int k_FuelMotorcycleNumberOfWheels = 2;
         private const float k_FuelMotorcycleMaxAirPressureInWheels = 31;
-        private const Vehicles.PowerSource.eFuelType k_FuelMotorcycleFuelType = Vehicles.PowerSource.eFuelType.Octan98;
+        private const eFuelType k_FuelMotorcycleFuelType = eFuelType.Octan98;
         private const float k_FuelMotorcycleTankFuel = 6.2f;
 
         private const int k_ElectricMotorcycleNumberOfWheels = 2;
@@ -23,7 +33,7 @@ namespace Ex03.GarageLogic.Garage
 
         private const int k_FualCarNumberOfWheels = 4;
         private const float k_FualCarMaxAirPressureInWheels = 29;
-        private const Vehicles.PowerSource.eFuelType k_FualCarFuelType = Vehicles.PowerSource.eFuelType.Octan95;
+        private const eFuelType k_FualCarFuelType = eFuelType.Octan95;
         private const float k_FualCarTankFuel = 38f;
 
 
@@ -33,11 +43,11 @@ namespace Ex03.GarageLogic.Garage
 
         private const int k_TruckNumberOfWheels = 16;
         private const float k_TruckMaxAirPressureInWheels = 24;
-        private const Vehicles.PowerSource.eFuelType k_TruckFuelType = Vehicles.PowerSource.eFuelType.Soler;
+        private const eFuelType k_TruckFuelType = eFuelType.Soler;
         private const float k_TruckTankFuel = 120f;
 
 
-        public static Vehicles.Vehicle CreateVehicle(string i_ModelName, string i_LicencePlate, eVehicleType i_VehicleType, string i_WheelManufacturerName, float i_WheelCurrentAirPressure, float i_CurrentEnergy)
+        public static Vehicle CreateVehicle(string i_ModelName, string i_LicencePlate, eVehicleType i_VehicleType, string i_WheelManufacturerName, float i_WheelCurrentAirPressure, float i_CurrentEnergy)
         {
             Vehicle newVehicle = null;
             PowerSource powerSource;
@@ -174,14 +184,7 @@ namespace Ex03.GarageLogic.Garage
         }
 
 
-        public enum eVehicleType // when we want to add another type of vehicle we add the type here
-        {
-            FuelMotorcycle,
-            ElectricMotorcycle,
-            FualCar,
-            ElectricCar,
-            Truck
-        }
+
 
 
 

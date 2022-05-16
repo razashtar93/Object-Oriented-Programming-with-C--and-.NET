@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ex03.GarageLogic;
-using Ex03.GarageLogic.Garage;
+
 
 namespace Ex03.ConsoleUI
 {
     class GarageConsoleUI
     {
-        private readonly Garage r_Garage;
+        private readonly GarageManager r_GarageManager;
         private const string k_MainMenuMessage = @"
 Welcome to our garage :) 
 Please select an action and then press 'Enter'
@@ -26,7 +26,7 @@ Please select an action and then press 'Enter'
 
         public GarageConsoleUI()
         {
-            this.r_Garage = new Garage();
+            this.r_GarageManager = new GarageManager();
         }
 
         public void Run()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ex03.GarageLogic.Vehicles.PowerSource
+namespace Ex03.GarageLogic
 {
     public class ElectricPowerSource : PowerSource
     {
@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic.Vehicles.PowerSource
 
             if (howMuchMoreToRecharge < i_Hours)
             {
-                throw new Garage.ValueOutOfRangeException(0, howMuchMoreToRecharge);
+                throw new ValueOutOfRangeException(0, howMuchMoreToRecharge);
             }
 
             base.CurrentEnergy += i_Hours;

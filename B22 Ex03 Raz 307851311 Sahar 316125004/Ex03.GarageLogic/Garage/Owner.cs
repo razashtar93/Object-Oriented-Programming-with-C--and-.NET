@@ -5,9 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Truck : Vehicle
+    public class Owner
     {
-        private bool m_RefrigeratedContents;
-        private float m_CargoVolume;
     }
 }
