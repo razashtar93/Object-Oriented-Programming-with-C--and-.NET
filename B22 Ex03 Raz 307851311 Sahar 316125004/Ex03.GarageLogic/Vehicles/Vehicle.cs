@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static Ex03.GarageLogic.Garage.VehicleGenerator;
+using static Ex03.GarageLogic.VehicleGenerator;
 
-namespace Ex03.GarageLogic.Vehicles
+namespace Ex03.GarageLogic
 {
     public abstract class Vehicle // Maybe Done.
     {
         private readonly string r_ModelName;
         private readonly string r_LicencePlate;
         private readonly Wheel[] r_Wheels;
-        private PowerSource.PowerSource m_PowerSource;
+        private PowerSource m_PowerSource;
         private readonly eVehicleType r_VehicleType;
 
 
-        protected Vehicle(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheels, PowerSource.PowerSource i_PowerSource, eVehicleType i_VehicleType)
+        protected Vehicle(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheels, PowerSource i_PowerSource, eVehicleType i_VehicleType)
         {
             this.r_ModelName = i_ModelName;
             this.r_LicencePlate = i_LicencePlate;
@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic.Vehicles
             get { return r_Wheels; }
         }
 
-        public PowerSource.PowerSource PowerSource
+        public PowerSource PowerSource
         {
             get { return m_PowerSource; }
             set { m_PowerSource = value; }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ex03.GarageLogic.Garage;
+//using Ex03.GarageLogic.Garage;
 
-namespace Ex03.GarageLogic.Vehicles.Motorcycle
+namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicle
     {
@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic.Vehicles.Motorcycle
         }
 
         public Motorcycle(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheel, PowerSource i_PowerSource,
-            eLicenceType i_LicenceType, int i_EngineCapacity, Garage.VehicleGenerator.eVehicleType i_VehicleType)
+            eLicenceType i_LicenceType, int i_EngineCapacity, VehicleGenerator.eVehicleType i_VehicleType)
             : base(i_ModelName, i_LicencePlate, i_Wheel, i_PowerSource, i_VehicleType)
         {
             m_LicenceType = i_LicenceType;
