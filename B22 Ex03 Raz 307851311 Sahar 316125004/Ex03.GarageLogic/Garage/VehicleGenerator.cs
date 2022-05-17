@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using Ex03.GarageLogic.Vehicles;
-//using Ex03.GarageLogic.Vehicles.Car;
-//using Ex03.GarageLogic.Vehicles.Motorcycle;
-//using Ex03.GarageLogic.Vehicles.PowerSource;
-//using Ex03.GarageLogic.Vehicles.Truck;
+
 
 namespace Ex03.GarageLogic
 {

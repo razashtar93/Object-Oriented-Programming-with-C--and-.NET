@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using Ex03.GarageLogic.Garage;
 
 namespace Ex03.GarageLogic
 {
