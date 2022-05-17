@@ -21,26 +21,29 @@ namespace Ex03.GarageLogic
             Truck
         }
 
-
+        //Fuel Motorcycle
         private const int k_FuelMotorcycleNumberOfWheels = 2;
         private const float k_FuelMotorcycleMaxAirPressureInWheels = 31;
         private const eFuelType k_FuelMotorcycleFuelType = eFuelType.Octan98;
         private const float k_FuelMotorcycleTankFuel = 6.2f;
 
+        //Electric Motorcycle
         private const int k_ElectricMotorcycleNumberOfWheels = 2;
         private const float k_ElectricMotorcycleMaxAirPressureInWheels = 31;
         private const float k_ElectricMotorcycleMaximumBatteryLife = 2.5f;
 
+        //Fual Car
         private const int k_FualCarNumberOfWheels = 4;
         private const float k_FualCarMaxAirPressureInWheels = 29;
         private const eFuelType k_FualCarFuelType = eFuelType.Octan95;
         private const float k_FualCarTankFuel = 38f;
 
-
+        //Electric Car
         private const int k_ElectricCarNumberOfWheels = 4;
         private const float k_ElectricCarMaxAirPressureInWheels = 29;
         private const float k_ElectricCarMaximumBatteryLife = 3.3f;
 
+        //Truck
         private const int k_TruckNumberOfWheels = 16;
         private const float k_TruckMaxAirPressureInWheels = 24;
         private const eFuelType k_TruckFuelType = eFuelType.Soler;

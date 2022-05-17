@@ -13,5 +13,23 @@ namespace Ex03.GarageLogic
         {
 
         }
+
+        // public get all license plate of vehicle in the garage
+        
+        // public add new vehicle
+
+        // public is the vehicle in the garage
+
+        // public change vehicle status
+
+        // public void addAirToVehicle(string i_LicensePlate)
+
+        // public void refuel
+
+        // public void recharge
+
+        // public get info of vehicle
+
+        //
     }
 }
