@@ -37,8 +37,8 @@ namespace Ex03.GarageLogic
 
         public void AirToAdd(float i_AirToAdd)
         {
-            // if i_AirToAdd + m_CurrentAirPressure <= r_MaxAirPressure then 
-            //    m_CurrentAirPressure = m_CurrentAirPressure + i_AirToAdd     else throw exception??   
+            i_AirToAdd = ConsoleInputValidation.CehckAirPresureValidation(m_CurrentAirPressure, i_AirToAdd, r_MaxAirPressure);
+            m_CurrentAirPressure += i_AirToAdd;
         }
 
     }
