@@ -11,6 +11,11 @@ namespace Ex03.GarageLogic
         private bool m_RefrigeratedContents;
         private float m_CargoVolume;
 
+        public Truck(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheels, PowerSource i_PowerSource, eVehicleType i_VehicleType) :
+            base(i_ModelName, i_LicencePlate, i_Wheels, i_PowerSource, i_VehicleType)
+        {
+
+        }
 
         public Truck(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheels, PowerSource i_PowerSource, eVehicleType i_VehicleType,
            bool i_RefrigeratedContents, float i_CargoVolume) : base(i_ModelName, i_LicencePlate, i_Wheels, i_PowerSource, i_VehicleType)

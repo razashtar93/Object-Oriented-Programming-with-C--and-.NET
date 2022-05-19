@@ -19,5 +19,29 @@ namespace Ex03.GarageLogic
             return i_AirPresureToAdd;
         }
 
+        internal static string GetModelName()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static string GetLicencePlate()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static Wheel[] GetWheels()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static PowerSource GetPowerSource()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static VehicleGenerator.eVehicleType GetVehicleType()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
