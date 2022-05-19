@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
             get { return r_MaxEnergy; }
         }
 
-        protected float CurrentEnergy
+        public float CurrentEnergy
         {
             set { m_CurrentEnergy = value; }
             get { return m_CurrentEnergy; }

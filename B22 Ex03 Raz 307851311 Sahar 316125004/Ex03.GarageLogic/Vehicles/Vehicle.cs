@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using static Ex03.GarageLogic.VehicleGenerator;
+//using PowerSource;
 
 namespace Ex03.GarageLogic
 {
     public abstract class Vehicle // Maybe Done.
     {
         private readonly string r_ModelName;
-        private readonly string r_LicencePlate;
+        private readonly string r_LicensePlate;
         private readonly Wheel[] r_Wheels;
         private PowerSource m_PowerSource;
         private readonly eVehicleType r_VehicleType;
 
 
-        protected Vehicle(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheels, PowerSource i_PowerSource, eVehicleType i_VehicleType)
+        protected Vehicle(string i_ModelName, string i_LicensePlate, Wheel[] i_Wheels, PowerSource i_PowerSource, eVehicleType i_VehicleType)
         {
             this.r_ModelName = i_ModelName;
-            this.r_LicencePlate = i_LicencePlate;
+            this.r_LicensePlate = i_LicensePlate;
             this.r_Wheels = i_Wheels;
             this.m_PowerSource = i_PowerSource;
             this.r_VehicleType = i_VehicleType;
@@ -32,7 +33,7 @@ namespace Ex03.GarageLogic
 
         public string LicencePlate
         {
-            get { return r_LicencePlate; }
+            get { return r_LicensePlate; }
         }
 
         public Wheel[] Wheels
@@ -63,7 +64,7 @@ Wheels info:
 {3}
 Power source info:
 {4}
-", r_ModelName, r_LicencePlate, r_VehicleType, wheels, PowerSource.ToString());
+", r_ModelName, r_LicensePlate, r_VehicleType, wheels, PowerSource.ToString());
 
             return output;
         }
