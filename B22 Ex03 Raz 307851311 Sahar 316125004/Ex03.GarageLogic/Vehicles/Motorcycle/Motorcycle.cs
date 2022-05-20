@@ -24,14 +24,5 @@ namespace Ex03.GarageLogic
             m_LicenceType = i_LicenceType;
             m_EngineCapacity = i_EngineCapacity;
         }
-
-        public override string ToString()
-        {
-            StringBuilder output = new StringBuilder(base.ToString());
-            output.AppendLine(String.Format("m_LicenceType : {0}", m_LicenceType));
-            output.AppendLine(String.Format("m_EngineCapacity: {0}", m_EngineCapacity));
-
-            return output.ToString();
-        }
     }
 }

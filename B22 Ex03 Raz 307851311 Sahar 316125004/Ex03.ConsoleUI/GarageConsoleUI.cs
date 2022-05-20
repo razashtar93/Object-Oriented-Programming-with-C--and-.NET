@@ -48,41 +48,73 @@ Please select an action and then press 'Enter'
 
             while (wantToQuit)
             {
-                Console.Clear();
-                Console.WriteLine(k_MainMenuMessage);
-                userInput = Console.ReadLine(); // make sure valid input for ""option !!!!
-                option = r_UserOptions[userInput];
-
-                switch (option)
+                try
                 {
-                    case eOptionChoice.addVehicle:
-                        addVehicle();
-                        break;
-                    case eOptionChoice.getLicensePlates:
-                        getLicensePlates();
-                        break;
-                    case eOptionChoice.changeVehicleStatus:
-                        changeVehicleStatus();
-                        break;
-                    case eOptionChoice.addAirToMaximum:
-                        addAirToMaximum();
-                        break;
-                    case eOptionChoice.refuel:
-                        refuel();
-                        break;
-                    case eOptionChoice.recharge:
-                        recharge();
-                        break;
-                    case eOptionChoice.getInfo:
-                        getInfo();
-                        break;
-                    case eOptionChoice.quit:
-                        wantToQuit = false;
-                        break;
+                    Console.Clear();
+                    Console.WriteLine(k_MainMenuMessage);
+                    userInput = Console.ReadLine(); // make sure valid input for ""option !!!!
+                    option = r_UserOptions[userInput];
 
-                        //default:
-                        //    Console.WriteLine("Invalid input, please choose again.");
-                        //    break;
+                    switch (option)
+                    {
+                        case eOptionChoice.addVehicle:
+                            addVehicle();
+                            break;
+                        case eOptionChoice.getLicensePlates:
+                            getLicensePlates();
+                            break;
+                        case eOptionChoice.changeVehicleStatus:
+                            changeVehicleStatus();
+                            break;
+                        case eOptionChoice.addAirToMaximum:
+                            addAirToMaximum();
+                            break;
+                        case eOptionChoice.refuel:
+                            refuel();
+                            break;
+                        case eOptionChoice.recharge:
+                            recharge();
+                            break;
+                        case eOptionChoice.getInfo:
+                            getInfo();
+                            break;
+                        case eOptionChoice.quit:
+                            wantToQuit = false;
+                            break;
+
+                            //default:
+                            //    Console.WriteLine("Invalid input, please choose again.");
+                            //    break;
+                    }
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine($"Invalid operation: {e.Message}");
+                    Console.WriteLine("Press 'Enter' to continue");
+                    Console.ReadLine();
+                }
+                catch (ValueOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine($"The maximum valid input is: {e.MaxValue}");
+                    Console.WriteLine($"The minimum valid input is: {e.MinValue}");
+
+                    Console.WriteLine("Press 'Enter' to continue");
+                    Console.ReadLine();
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+
+                    Console.WriteLine("Press 'Enter' to continue");
+                    Console.ReadLine();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+
+                    Console.WriteLine("Press 'Enter' to continue");
+                    Console.ReadLine();
                 }
 
             }
@@ -90,18 +122,52 @@ Please select an action and then press 'Enter'
 
 
 
+        // Console.WriteLine("Please enter ");
+
         private void addVehicle() //TODO: Implement this
         {
             Console.Clear();
-            // check if vehicle exist - is yes change status if not add to garage
-            //adding vehicle: new vehicle by type (car/motor ..) add owner etc ..
 
 
-            /* Body of function */
+            Console.WriteLine("Please enter license plate");
+            string licensePlate = Console.ReadLine();
+
+            if (r_GarageManager.isVehicleInTheGarage(licensePlate))
+            {
+                try
+                {
+                    r_GarageManager.AddExistingVehicle(licensePlate);
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Please enter owner name");
+                string ownerName = Console.ReadLine();
+                Console.WriteLine("Please enter owner phone number");
+                string ownerPhoneNumber = Console.ReadLine();
+                Console.WriteLine("Please enter model name");
+                string modelName = Console.ReadLine();
+                Console.WriteLine("Please enter vehicle type");
+                string vehicalType = Console.ReadLine(); //string vehicle type -> need to change to enum
+                Console.WriteLine("Please enter wheels manufacturer name");
+                string wheelsManufacturerName = Console.ReadLine();
+                Console.WriteLine("Please enter current tyre Pressure");
+                string tyrePressure = Console.ReadLine(); // change this to float or int or whatever
+                Console.WriteLine("Please enter Current Energy");
+                string currentEnergy = Console.ReadLine(); // change this to float or int or whatever
 
 
-            Console.WriteLine(k_GoBackToMainMenuMessage);
-            Console.ReadLine();
+                r_GarageManager.AddNewVehicle(modelName, licensePlate, vehicalType, wheelsManufacturerName, tyrePressure, currentEnergy,
+                   ownerName, ownerPhoneNumber);
+
+
+                Console.WriteLine(k_GoBackToMainMenuMessage);
+                Console.ReadLine();
+            }
         }
 
         private void getLicensePlates() //TODO: Implement this
@@ -147,6 +213,9 @@ Please select an action and then press 'Enter'
         {
             Console.Clear();
             //
+            //if the vehicle is not a fuel vehicle then exception or print error
+            // else get license plate fuel type and how much to fill and do
+            // GarageManager.refuel(license, type, howMuchTo);
 
 
             /* Body of function */
