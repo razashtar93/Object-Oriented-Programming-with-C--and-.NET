@@ -42,9 +42,6 @@ namespace Ex03.GarageLogic
         }
 
 
-        //public static Dictionary<int, eFuelType> GetFuelTypeDictionary()
-        //{
-        //    return DictUtils.GetEnumDictionary<eFuelType>();             ///TODO: do we need this?
-        //}  
+       
     }
 }

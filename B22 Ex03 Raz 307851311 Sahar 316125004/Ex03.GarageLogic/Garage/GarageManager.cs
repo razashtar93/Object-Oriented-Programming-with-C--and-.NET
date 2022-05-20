@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
             //VehiclesInTheGarage vehicleInTheGarage = r_VehiclesInTheGarage[i_LicensePlate];
             if (r_VehiclesInTheGarage[i_LicensePlate].VehicleStatus == eVehicleStatus.InRepair)
             {
-                throw new ArgumentException("The vehicle is already in the garage");
+                throw new ArgumentException("The vehicle is already in the garage and in repair status");
             }
             else
             {
@@ -155,6 +155,19 @@ namespace Ex03.GarageLogic
         public void refuel(string i_LicensePlate, eFuelType i_FuelType, float i_FuelLiters)
         {
             r_VehiclesInTheGarage[i_LicensePlate].Vehicle.PowerSource.fuel
+
+                try
+            {
+
+            }
+            catch(ArgumentException e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+
+
+
+
         }
 
         //Refuel(float i_FuelLiters, eFuelType i_FuelType)
@@ -169,8 +182,8 @@ namespace Ex03.GarageLogic
         {
             StringBuilder VehicleInfo = new StringBuilder();
             VehicleInfo.Append(r_VehiclesInTheGarage[i_LicensePlate].Vehicle.ToString());
-            VehicleInfo.Append(String.Format("Car owner: {0}", r_VehiclesInTheGarage[i_LicensePlate].Owner));
-            VehicleInfo.Append(String.Format("Car status: {0}", r_VehiclesInTheGarage[i_LicensePlate].VehicleStatus));
+            VehicleInfo.Append(String.Format("Vehicle owner: {0}", r_VehiclesInTheGarage[i_LicensePlate].Owner.ToString()));
+            VehicleInfo.Append(String.Format("Vehicle status: {0}", r_VehiclesInTheGarage[i_LicensePlate].VehicleStatus));
 
             return VehicleInfo.ToString();
         }
