@@ -14,6 +14,9 @@ namespace Ex03.ConsoleUI
         private readonly Dictionary<string, VehicleGenerator.eVehicleType> r_UserVehicalTypeOption;
         private readonly Dictionary<string, eVehicleStatus> r_UserVehicalStatusOption;
         private readonly Dictionary<string, eFuelType> r_UserFuelType;
+        private readonly Dictionary<string, eNumberOfDoors> r_UserCarNumberOfDoors;
+        private readonly Dictionary<string, eColor> r_UserCarColor;
+        private readonly Dictionary<string, eLicenceType> r_UserMotorcycleLicenceType;
         private const string k_MainMenuMessage = @"
             Welcome to our garage :) 
 
@@ -26,10 +29,8 @@ Please select an action and then press 'Enter'
 6. To recharge an electric vehicle press '6' 
 7. To get information about a vehicle press '7'
 8. To quit press 'q'
- "; // think about something else to say maybe ...
-        private const string k_GoBackToMainMenuMessage = "To go back to main menu please press 'Enter'";
-
-
+ ";
+        private const string k_GoBackToMainMenuMessage = "\nTo go back to main menu please press 'Enter'";
 
         public GarageConsoleUI()
         {
@@ -62,7 +63,27 @@ Please select an action and then press 'Enter'
             r_UserFuelType.Add("3", eFuelType.Octan96);
             r_UserFuelType.Add("4", eFuelType.Octan98);
 
+            this.r_UserCarNumberOfDoors = new Dictionary<string, eNumberOfDoors>();
+            r_UserCarNumberOfDoors.Add("2", eNumberOfDoors.Two);
+            r_UserCarNumberOfDoors.Add("3", eNumberOfDoors.Three);
+            r_UserCarNumberOfDoors.Add("4", eNumberOfDoors.Four);
+            r_UserCarNumberOfDoors.Add("5", eNumberOfDoors.Five);
 
+
+            this.r_UserCarColor = new Dictionary<string, eColor>();
+            r_UserCarColor.Add("1", eColor.Red);
+            r_UserCarColor.Add("2", eColor.White);
+            r_UserCarColor.Add("3", eColor.Green);
+            r_UserCarColor.Add("4", eColor.Blue);
+
+
+
+
+            this.r_UserMotorcycleLicenceType = new Dictionary<string, eLicenceType>();
+            r_UserMotorcycleLicenceType.Add("1", eLicenceType.A);
+            r_UserMotorcycleLicenceType.Add("2", eLicenceType.A1);
+            r_UserMotorcycleLicenceType.Add("3", eLicenceType.B1);
+            r_UserMotorcycleLicenceType.Add("4", eLicenceType.BB);
         }
 
         public void Run()
@@ -147,7 +168,7 @@ Please select an action and then press 'Enter'
 
 
 
-       
+
 
 
         private void addVehicle()
@@ -188,9 +209,7 @@ Please select an action and then press 'Enter'
                 Console.WriteLine("Please enter wheels manufacturer name");
                 string wheelsManufacturerName = Console.ReadLine();
 
-
                 Console.WriteLine("Please enter current tyre Pressure");
-
 
                 string userTyrePressureInput = Console.ReadLine(); // make sure input is float
                 float tyrePressure = (float)Convert.ToDouble(userTyrePressureInput);
@@ -202,7 +221,114 @@ Please select an action and then press 'Enter'
 
                 r_GarageManager.AddNewVehicle(modelName, licensePlate, vehicalType, wheelsManufacturerName, tyrePressure, currentEnergy,
                    ownerName, ownerPhoneNumber);
+
+
+
+                switch (vehicalType)
+                {
+                    case VehicleGenerator.eVehicleType.FuelMotorcycle:
+                        Console.WriteLine(@"Please choose license type, the options are:
+1. A
+2. A1
+3. B1
+4. BB");
+
+                        string userInput1 = Console.ReadLine();
+                        eLicenceType FuelMotorcycleLicenceType = r_UserMotorcycleLicenceType[userInput1];
+
+                        Console.WriteLine("Please enter Engine Capacity");
+                        int engineCapacity1 = Convert.ToInt32(Console.ReadLine());
+
+                        r_GarageManager.VehicleToMotorcycle(licensePlate, FuelMotorcycleLicenceType, engineCapacity1);
+                        break;
+
+                    case VehicleGenerator.eVehicleType.ElectricMotorcycle:
+                        Console.WriteLine(@"Please choose license type, the options are:
+1. A
+2. A1
+3. B1
+4. BB");
+
+
+                        string userInput2 = Console.ReadLine();
+                        eLicenceType ElectricMotorcycleLicenceType = r_UserMotorcycleLicenceType[userInput2];
+
+                        Console.WriteLine("i_EngineCapacity");
+
+                        int engineCapacity2 = Convert.ToInt32(Console.ReadLine());
+
+                        r_GarageManager.VehicleToMotorcycle(licensePlate, ElectricMotorcycleLicenceType, engineCapacity2);
+                        break;
+
+                    case VehicleGenerator.eVehicleType.FualCar:
+
+                        Console.WriteLine(@"Please choose car color, the options are:
+1. Red
+2. White
+3. Green
+4. Blue");
+
+                        string userInput3 = Console.ReadLine();
+                        eColor FuelCarColor = r_UserCarColor[userInput3];
+
+                        Console.WriteLine("Please enter car number of doors, the options are: 2, 3, 4, 5");
+
+                        string userInput4 = Console.ReadLine();
+                        eNumberOfDoors FuelCarDoors = r_UserCarNumberOfDoors[userInput4];
+
+                        r_GarageManager.VehicleToCar(licensePlate, FuelCarColor, FuelCarDoors);
+
+                        break;
+
+                    case VehicleGenerator.eVehicleType.ElectricCar:
+
+                        Console.WriteLine(@"Please choose car color, the options are:
+1. Red
+2. White
+3. Green
+4. Blue");
+
+                        string userInput5 = Console.ReadLine();
+                        eColor ElectricCarColor = r_UserCarColor[userInput5];
+
+                        Console.WriteLine(@"Please enter car number of doors, the options are:
+1. Two
+2. Three
+3. Four
+4. Five");
+                        string userInput6 = Console.ReadLine();
+                        eNumberOfDoors electricCarDoors = r_UserCarNumberOfDoors[userInput6];
+
+                        r_GarageManager.VehicleToCar(licensePlate, ElectricCarColor, electricCarDoors);
+
+
+                        break;
+                    case VehicleGenerator.eVehicleType.Truck:
+                        //cold
+                        //volium 
+
+                        Console.WriteLine("is the truck contain refrigerated contents? [y/n]");
+                        string userInput7 = Console.ReadLine();
+                        bool isRefrigeratedContents = false;
+
+                        if (userInput7.Equals("y"))
+                        {
+                            isRefrigeratedContents = true;
+                        }
+
+                        Console.WriteLine("Please enter truck cargo volume");
+                        string userInput8 = Console.ReadLine();
+                        float cargoVolume = (float)Convert.ToDouble(userInput8);
+
+                        r_GarageManager.VehicleToTruck(licensePlate, isRefrigeratedContents, cargoVolume);
+
+
+                        break;
+                }
+
             }
+
+
 
             Console.WriteLine(k_GoBackToMainMenuMessage);
             Console.ReadLine();
@@ -216,7 +342,7 @@ Please select an action and then press 'Enter'
             Console.WriteLine("Do you want to filter? [y/n]");
 
             string wantFilter = Console.ReadLine();
-            if (wantFilter == "y")
+            if (wantFilter.Equals("y"))
             {
                 Console.WriteLine(@"Please choose an option:
 1. In Repair
@@ -226,16 +352,16 @@ Please select an action and then press 'Enter'
                 string userChoice = Console.ReadLine();
                 eVehicleStatus userEnumChoice = r_UserVehicalStatusOption[userChoice]; // make sure valid input !!!!
 
-                r_GarageManager.GetLicensePlateByFilter(userEnumChoice);
+                Console.WriteLine(r_GarageManager.GetLicensePlateByFilter(userEnumChoice));
 
             }
             else
             {
-                r_GarageManager.GetAllLicensePlates();
+                Console.WriteLine(r_GarageManager.GetAllLicensePlates());
             }
 
 
-            Console.WriteLine("\n" + k_GoBackToMainMenuMessage);
+            Console.WriteLine(k_GoBackToMainMenuMessage);
             Console.ReadLine();
         }
 
@@ -268,7 +394,7 @@ Please select an action and then press 'Enter'
         private void addAirToMaximum()
         {
             Console.Clear();
-           
+
             try
             {
                 Console.WriteLine("Please enter license plate");
@@ -352,7 +478,7 @@ Please select an action and then press 'Enter'
             Console.ReadLine();
         }
 
-        private void getInfo() 
+        private void getInfo()
         {
             Console.Clear();
 
@@ -386,7 +512,7 @@ Please select an action and then press 'Enter'
             quit
         }
 
-       
+
 
     }
 }

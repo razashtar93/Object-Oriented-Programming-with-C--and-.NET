@@ -20,7 +20,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("Owner: Name - {0} , Phone Number - {1}", m_Name, m_PhoneNumber);
+            return String.Format(" Name - {0} , Phone Number - {1}", m_Name, m_PhoneNumber);
         }
     }
 }
