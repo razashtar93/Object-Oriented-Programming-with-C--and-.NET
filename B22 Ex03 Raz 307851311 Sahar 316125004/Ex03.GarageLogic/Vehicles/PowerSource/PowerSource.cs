@@ -35,8 +35,6 @@ namespace Ex03.GarageLogic
         public float HowMuchLeftForMaxEnergy()
         {
             return (this.r_MaxEnergy - this.m_CurrentEnergy);
-
-
         }
     }
 }
