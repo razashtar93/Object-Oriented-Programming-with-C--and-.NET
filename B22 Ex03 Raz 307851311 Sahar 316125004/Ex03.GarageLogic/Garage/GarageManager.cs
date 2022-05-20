@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
 
             foreach (KeyValuePair<string, VehiclesInTheGarage> vehicle in r_VehiclesInTheGarage)
             {
-                if (vehicle.Value.Vehicle.LicencePlate == i_LicensePlate)// change to equals
+                if (vehicle.Value.Vehicle.LicencePlate.Equals(i_LicensePlate))
                 {
                     answer = true;
                     break;
@@ -56,6 +56,32 @@ namespace Ex03.GarageLogic
 
         }
 
+        //VehicleToCar
+        public void VehicleToCar(string i_LicensePlate, eColor i_Color, eNumberOfDoors i_NumberOfDoors)
+        {
+            Car car = r_VehiclesInTheGarage[i_LicensePlate].Vehicle as Car;
+            car.NumberOfDoors = i_NumberOfDoors;
+            car.CarColor = i_Color;
+
+
+        }
+
+        //VehicleToMotorcycle
+        public void VehicleToMotorcycle(string i_LicensePlate, eLicenceType i_LicenceType, int i_EngineCapacity)
+        {
+            Motorcycle motorcycle = r_VehiclesInTheGarage[i_LicensePlate].Vehicle as Motorcycle;
+            motorcycle.LicenceType = i_LicenceType;
+            motorcycle.EngineCapacity = i_EngineCapacity;
+        }
+
+        //VehicleTotruck
+        public void VehicleToTruck(string i_LicensePlate, bool i_RefrigeratedContents, float i_CargoVolume)
+        {
+            Truck truck = r_VehiclesInTheGarage[i_LicensePlate].Vehicle as Truck;
+            truck.RefrigeratedContents = i_RefrigeratedContents;
+            truck.CargoVolume = i_CargoVolume;
+        }
+
 
 
 
@@ -71,7 +97,7 @@ namespace Ex03.GarageLogic
             {
                 if (vehicle.Value.VehicleStatus == i_VehileStatus)
                 {
-                    ListOfLicencePlates.Append(vehicle.Key);
+                    ListOfLicencePlates.Append("Car Number: " + vehicle.Key + "\n");
                 }
             }
 
@@ -85,7 +111,7 @@ namespace Ex03.GarageLogic
 
             foreach (KeyValuePair<string, VehiclesInTheGarage> vehicle in r_VehiclesInTheGarage)
             {
-                ListOfLicencePlates.Append(vehicle.Key);
+                ListOfLicencePlates.Append("Car Number: " + vehicle.Key + "\n");
             }
 
             return ListOfLicencePlates.ToString();
@@ -195,7 +221,7 @@ namespace Ex03.GarageLogic
 
             StringBuilder VehicleInfo = new StringBuilder();
             VehicleInfo.Append(r_VehiclesInTheGarage[i_LicensePlate].Vehicle.ToString());
-            VehicleInfo.Append(String.Format("Vehicle owner: {0}", r_VehiclesInTheGarage[i_LicensePlate].Owner.ToString()));
+            VehicleInfo.Append(String.Format("Vehicle owner: {0}\n", r_VehiclesInTheGarage[i_LicensePlate].Owner.ToString()));
             VehicleInfo.Append(String.Format("Vehicle status: {0}", r_VehiclesInTheGarage[i_LicensePlate].VehicleStatus));
 
             return VehicleInfo.ToString();

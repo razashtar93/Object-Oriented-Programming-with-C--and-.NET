@@ -63,7 +63,7 @@ Wheels info:
 {3}
 Power source info:
 {4}
-", r_ModelName, r_LicencePlate, r_VehicleType, wheels, PowerSource.ToString());
+", r_LicencePlate, r_ModelName, r_VehicleType, wheels, PowerSource.ToString());
 
             return output;
         }
@@ -71,6 +71,7 @@ Power source info:
         private string wheelsToString(Wheel[] i_Wheels)
         {
             StringBuilder outputstringWheels = new StringBuilder();
+            outputstringWheels.AppendLine("Manufacturer Name: " + i_Wheels[0].ManufacturerName);
 
             foreach (Wheel wheel in i_Wheels)
             {
@@ -80,9 +81,6 @@ Power source info:
             return outputstringWheels.ToString();
         }
 
-        //public static Dictionary<int, eVehicleType> GetVehicleTypeDictionary()
-        //{
-        //    return DictUtils.GetEnumDictionary<eVehicleType>();
-        //}
+
     }
 }
