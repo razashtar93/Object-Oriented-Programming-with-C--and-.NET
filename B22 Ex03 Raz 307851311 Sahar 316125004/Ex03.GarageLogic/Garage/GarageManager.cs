@@ -9,9 +9,6 @@ namespace Ex03.GarageLogic
 {
     public class GarageManager
     {
-        // list or dictionary of vehicles in the garage which will initialize in the constructor
-        //private List<Vehicle> m_VehiclesList = new List<Vehicle>();
-
         readonly Dictionary<string, VehiclesInTheGarage> r_VehiclesInTheGarage;
 
 
@@ -26,7 +23,7 @@ namespace Ex03.GarageLogic
 
             foreach (KeyValuePair<string, VehiclesInTheGarage> vehicle in r_VehiclesInTheGarage)
             {
-                if (vehicle.Value.Vehicle.LicencePlate == i_LicensePlate)
+                if (vehicle.Value.Vehicle.LicencePlate == i_LicensePlate)// change to equals
                 {
                     answer = true;
                     break;
@@ -38,14 +35,12 @@ namespace Ex03.GarageLogic
 
         public void AddExistingVehicle(string i_LicensePlate)
         {
-            //VehiclesInTheGarage vehicleInTheGarage = r_VehiclesInTheGarage[i_LicensePlate];
             if (r_VehiclesInTheGarage[i_LicensePlate].VehicleStatus == eVehicleStatus.InRepair)
             {
                 throw new ArgumentException("The vehicle is already in the garage and in repair status");
             }
             else
             {
-                //vehicleInTheGarage.VehicleStatus = eVehicleStatus.InRepair;
                 r_VehiclesInTheGarage[i_LicensePlate].VehicleStatus = eVehicleStatus.InRepair;
             }
         }
@@ -65,28 +60,7 @@ namespace Ex03.GarageLogic
 
 
 
-        //public void AddNewVehicle(Vehicle i_VehicleToAdd, Owner i_NewVehicleOwner) // need to create here the owner! we get name and phone number from the user .. 
-        //{ // also need to create a vehicle object .. the user only give a license Plate
-        //    if (r_VehiclesInTheGarage.ContainsKey(i_VehicleToAdd.LicencePlate) &&
-        //        r_VehiclesInTheGarage[i_VehicleToAdd.LicencePlate].VehicleStatus == eVehicleStatus.InRepair)
-        //    {
-        //        throw new ArgumentException("The vehicle is already in the garage");
-        //    }
-        //    else
-        //    {
-        //        if (r_VehiclesInTheGarage.ContainsKey(i_VehicleToAdd.LicencePlate))
-        //        {
-        //            //only change status
-        //            VehiclesInTheGarage vehicleInTheGarage = r_VehiclesInTheGarage[i_VehicleToAdd.LicencePlate];
-        //            vehicleInTheGarage.VehicleStatus = eVehicleStatus.InRepair;
-        //        }
-        //        else
-        //        {
-        //            VehiclesInTheGarage vehiclesInTheGarageToAdd = new VehiclesInTheGarage(i_VehicleToAdd, i_NewVehicleOwner, eVehicleStatus.InRepair);
-        //            r_VehiclesInTheGarage.Add(i_VehicleToAdd.LicencePlate, vehiclesInTheGarageToAdd);
-        //        }
-        //    }
-        //}
+
 
         // public get all license plate of vehicle in the garage by filter
         public string GetLicensePlateByFilter(eVehicleStatus i_VehileStatus)
@@ -121,7 +95,7 @@ namespace Ex03.GarageLogic
         // public change vehicle status
         public void ChangeVehicleStatus(string i_LicensePlate, eVehicleStatus i_NewStatus)
         {
-            if (!r_VehiclesInTheGarage.ContainsKey(i_LicensePlate))
+            if (!isVehicleInTheGarage(i_LicensePlate))
             {
                 throw new ArgumentException("The vehicle isn't in the garage");
             }
@@ -132,10 +106,10 @@ namespace Ex03.GarageLogic
             }
         }
 
-        // add air presure to car (max)
-        public void addMaxAirToVehicle(string i_LicensePlate)
+        // add air presure to vehicle (max)
+        public void AddMaxAirToVehicle(string i_LicensePlate)
         {
-            if (!r_VehiclesInTheGarage.ContainsKey(i_LicensePlate))
+            if (!isVehicleInTheGarage(i_LicensePlate))
             {
                 throw new ArgumentException("The vehicle isn't in the garage");
             }
@@ -143,6 +117,7 @@ namespace Ex03.GarageLogic
             else
             {
                 Wheel[] vehicleWheels = r_VehiclesInTheGarage[i_LicensePlate].Vehicle.Wheels;
+
                 for (int i = 0; i < vehicleWheels.Length; i++)
                 {
                     r_VehiclesInTheGarage[i_LicensePlate].Vehicle.Wheels[i].CurrentAirPressure = r_VehiclesInTheGarage[i_LicensePlate].Vehicle.Wheels[i].MaxAirPressure;
@@ -152,34 +127,72 @@ namespace Ex03.GarageLogic
 
 
         // refuel 
-        public void refuel(string i_LicensePlate, eFuelType i_FuelType, float i_FuelLiters)
+        public void Refuel(string i_LicensePlate, eFuelType i_FuelType, float i_FuelLiters)
         {
-            r_VehiclesInTheGarage[i_LicensePlate].Vehicle.PowerSource.fuel
+            FuelPowerSource fuelPowerSourceObj = (r_VehiclesInTheGarage[i_LicensePlate].Vehicle.PowerSource as FuelPowerSource);
 
-                try
+            if (!isVehicleInTheGarage(i_LicensePlate))
             {
-
+                throw new ArgumentException("The vehicle isn't in the garage");
             }
-            catch(ArgumentException e)
+
+            if (fuelPowerSourceObj == null)
+            {
+                throw new ArgumentException("You can`t refuel an electric vehicle");
+            }
+
+            try
+            {
+                (r_VehiclesInTheGarage[i_LicensePlate].Vehicle.PowerSource as FuelPowerSource).Refuel(i_FuelLiters, i_FuelType);
+            }
+
+            catch (ArgumentException e)
             {
                 throw new ArgumentException(e.Message);
             }
 
-
-
-
+            catch (ValueOutOfRangeException e)
+            {
+                throw new ValueOutOfRangeException(e.MinValue, e.MaxValue);
+            }
         }
-
-        //Refuel(float i_FuelLiters, eFuelType i_FuelType)
 
 
         // public void recharge
+        public void Recharge(string i_LicensePlate, float i_MinutesToCharge)
+        {
+            ElectricPowerSource electricPowerSourceObj = (r_VehiclesInTheGarage[i_LicensePlate].Vehicle.PowerSource as ElectricPowerSource);
+            float hoursToCharge = i_MinutesToCharge / 60;
 
+            if (!isVehicleInTheGarage(i_LicensePlate))
+            {
+                throw new ArgumentException("The vehicle isn't in the garage");
+            }
 
+            if (electricPowerSourceObj == null)
+            {
+                throw new ArgumentException("You can`t recharge a fuel vehicle");
+            }
+
+            try
+            {
+                (r_VehiclesInTheGarage[i_LicensePlate].Vehicle.PowerSource as ElectricPowerSource).Recharge(hoursToCharge);
+            }
+
+            catch (ValueOutOfRangeException e)
+            {
+                throw new ValueOutOfRangeException(e.MaxValue, e.MinValue);
+            }
+        }
 
         // public get info of vehicle
         public string GetVehicleInfo(string i_LicensePlate)
         {
+            if (!isVehicleInTheGarage(i_LicensePlate))
+            {
+                throw new ArgumentException("The vehicle isn't in the garage");
+            }
+
             StringBuilder VehicleInfo = new StringBuilder();
             VehicleInfo.Append(r_VehiclesInTheGarage[i_LicensePlate].Vehicle.ToString());
             VehicleInfo.Append(String.Format("Vehicle owner: {0}", r_VehiclesInTheGarage[i_LicensePlate].Owner.ToString()));

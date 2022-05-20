@@ -35,11 +35,22 @@ namespace Ex03.GarageLogic
             get { return r_MaxAirPressure; }
         }
 
-        public void AirToAdd(float i_AirToAdd)
-        {
-            i_AirToAdd = ConsoleInputValidation.CehckAirPresureValidation(m_CurrentAirPressure, i_AirToAdd, r_MaxAirPressure);
-            m_CurrentAirPressure += i_AirToAdd;
-        }
+        //public void AirToAdd(float i_AirToAdd)
+        //{
+        //    i_AirToAdd = ConsoleInputValidation.CehckAirPresureValidation(m_CurrentAirPressure, i_AirToAdd, r_MaxAirPressure);
+        //    m_CurrentAirPressure += i_AirToAdd;
+        //}
 
+
+        //public static float CehckAirPresureValidation(float i_CurrentAirPresure, float i_AirPresureToAdd, float i_MaxAirPresureAllowed)
+        //{
+        //    while (i_CurrentAirPresure + i_AirPresureToAdd > i_MaxAirPresureAllowed)
+        //    {
+        //        ConsoleMessages.InValideInputeError();
+        //        i_AirPresureToAdd = float.Parse(Console.ReadLine());
+        //    }
+
+        //    return i_AirPresureToAdd;
+        //}
     }
 }

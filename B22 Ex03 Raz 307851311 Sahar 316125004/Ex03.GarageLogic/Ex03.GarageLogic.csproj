@@ -40,18 +40,20 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Garage\eVehicleStatus.cs" />
-    <Compile Include="Garage\Garage.cs" />
+    <Compile Include="Garage\GarageManager.cs" />
+    <Compile Include="Garage\Owner.cs" />
     <Compile Include="Garage\ValueOutOfRangeException.cs" />
     <Compile Include="Garage\VehicleGenerator.cs" />
+    <Compile Include="Garage\VehiclesInTheGarage.cs" />
     <Compile Include="Vehicles\Car\Car.cs" />
     <Compile Include="Vehicles\Car\eColor.cs" />
     <Compile Include="Vehicles\Car\eNumberOfDoors.cs" />
     <Compile Include="Vehicles\Motorcycle\eLicenceType.cs" />
     <Compile Include="Vehicles\Motorcycle\Motorcycle.cs" />
-    <Compile Include="Vehicles\PowerSources\eFuelType.cs" />
-    <Compile Include="Vehicles\PowerSources\ElectricPowerSource.cs" />
-    <Compile Include="Vehicles\PowerSources\FuelPowerSource.cs" />
-    <Compile Include="Vehicles\PowerSources\PowerSource.cs" />
+    <Compile Include="Vehicles\PowerSource\eFuelType.cs" />
+    <Compile Include="Vehicles\PowerSource\ElectricPowerSource.cs" />
+    <Compile Include="Vehicles\PowerSource\FuelPowerSource.cs" />
+    <Compile Include="Vehicles\PowerSource\PowerSource.cs" />
     <Compile Include="Vehicles\Truck\Truck.cs" />
     <Compile Include="Vehicles\Vehicle.cs" />
     <Compile Include="Vehicles\Wheel.cs" />
