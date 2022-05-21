@@ -97,12 +97,17 @@ namespace Ex03.GarageLogic
         public void AddNewVehicle(string i_ModelName, string i_LicensePlate, eVehicleType i_VehicleType,
             string i_WheelManufacturerName, float i_WheelCurrentAirPressure, float i_CurrentEnergy, string i_OwnerName, string i_OwenerPhoneNumber)
         {
+            try { 
             Vehicle vehicle = VehicleGenerator.CreateVehicle(i_ModelName, i_LicensePlate, i_VehicleType, i_WheelManufacturerName, i_WheelCurrentAirPressure, i_CurrentEnergy);
             Owner owner = new Owner(i_OwnerName, i_OwenerPhoneNumber);
             VehiclesInTheGarage vehicleInTheGarage = new VehiclesInTheGarage(vehicle, owner, eVehicleStatus.InRepair);
 
             r_VehiclesInTheGarage.Add(i_LicensePlate, vehicleInTheGarage);
-
+            }
+            catch(ValueOutOfRangeException e)
+            {
+                throw new ArgumentException($"the maximum value is: {e.MaxValue} and the minimum value is: {e.MinValue}");
+            }
         }
 
         //Vehicle To Car
