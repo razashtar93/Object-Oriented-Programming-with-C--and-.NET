@@ -293,6 +293,10 @@ Please select an action and then press 'Enter'
                             break;
                     }
                 }
+                catch(ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
                 catch
                 {
                     throw new ArgumentException("Invalid input, please try again");
