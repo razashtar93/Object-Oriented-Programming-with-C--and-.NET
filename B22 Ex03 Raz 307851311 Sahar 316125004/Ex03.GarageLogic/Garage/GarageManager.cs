@@ -15,7 +15,55 @@ namespace Ex03.GarageLogic
         public GarageManager()
         {
             r_VehiclesInTheGarage = new Dictionary<string, VehiclesInTheGarage>();
+
+            //-------------------------------Test------------------------------------//
+            r_VehiclesInTheGarage.Add("1", makeFuelCarForTest());
+            r_VehiclesInTheGarage.Add("2", makeElectricCarForTest());
+
+            //-------------------------------Test------------------------------------//
         }
+
+
+
+        //-------------------------------Test------------------------------------//
+        private VehiclesInTheGarage makeFuelCarForTest()
+        {
+            Wheel[] wheels = new Wheel[4];
+            Wheel wheel1 = new Wheel("Mishlin", 25, 29);
+            FuelPowerSource powerSourceTest = new FuelPowerSource(40,35,eFuelType.Octan95);
+            Owner ownerTest = new Owner("Sahar Tirosh", "054-6827667");
+
+            for (int i = 0; i < 4; i++)
+            {
+                wheels[i] = wheel1;
+            }
+
+            Car carTest = new Car("BMW", "1", wheels, (powerSourceTest as PowerSource), eVehicleType.FualCar);
+            VehiclesInTheGarage vehicleTest = new VehiclesInTheGarage(carTest, ownerTest,eVehicleStatus.InRepair);
+
+            return vehicleTest;
+        }
+
+        private VehiclesInTheGarage makeElectricCarForTest()
+        {
+            Wheel[] wheels = new Wheel[4];
+            Wheel wheel1 = new Wheel("Kommo", 31, 33);
+            ElectricPowerSource electricPowerSourceTest = new ElectricPowerSource(4,(float)2.8);
+            Owner ownerTest = new Owner("Raz Ashtar", "052-3334545");
+
+            for (int i = 0; i < 4; i++)
+            {
+                wheels[i] = wheel1;
+            }
+
+            Car carTest = new Car("Tesla", "2", wheels, (electricPowerSourceTest as PowerSource), eVehicleType.ElectricCar);
+            VehiclesInTheGarage vehicleTest = new VehiclesInTheGarage(carTest, ownerTest, eVehicleStatus.InRepair);
+
+            return vehicleTest;
+        }
+
+        //-------------------------------Test------------------------------------//
+
 
         public bool isVehicleInTheGarage(string i_LicensePlate)
         {

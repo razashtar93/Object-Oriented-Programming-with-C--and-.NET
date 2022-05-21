@@ -439,8 +439,8 @@ Please select an action and then press 'Enter'
             }
             catch (ValueOutOfRangeException e)
             {
-                Console.WriteLine($"The minimum valid input is {0}", e.MinValue);
-                Console.WriteLine($"The maximum valid input is {0}", e.MaxValue);
+                Console.WriteLine(String.Format("The minimum valid input is {0}", e.MinValue));
+                Console.WriteLine(String.Format("The maximum valid input is {0}", e.MaxValue));
             }
 
             Console.WriteLine(k_GoBackToMainMenuMessage);
@@ -469,8 +469,8 @@ Please select an action and then press 'Enter'
             }
             catch (ValueOutOfRangeException e)
             {
-                Console.WriteLine($"The minimum valid input is {0}", e.MinValue);
-                Console.WriteLine($"The maximum valid input is {0}", e.MaxValue);
+                Console.WriteLine(String.Format("The minimum valid input is {0}", e.MinValue));
+                Console.WriteLine(String.Format("The maximum valid input is {0}", e.MaxValue));
             }
 
 

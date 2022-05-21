@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
 
             if (howMuchMoreToRecharge < i_Hours)
             {
-                throw new ValueOutOfRangeException(0, howMuchMoreToRecharge);
+                throw new ValueOutOfRangeException(howMuchMoreToRecharge, 0);
             }
 
             base.CurrentEnergy += i_Hours;
