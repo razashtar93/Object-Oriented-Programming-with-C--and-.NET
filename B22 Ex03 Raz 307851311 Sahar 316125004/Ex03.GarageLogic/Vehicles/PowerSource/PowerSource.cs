@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class PowerSource // Done. 
+    public abstract class PowerSource 
     {
         private readonly float r_MaxEnergy;
         private float m_CurrentEnergy;

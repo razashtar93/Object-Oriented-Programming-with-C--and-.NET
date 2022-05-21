@@ -11,7 +11,6 @@ namespace Ex03.GarageLogic
         private bool m_RefrigeratedContents;
         private float m_CargoVolume;
 
-
         public Truck(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheels, PowerSource i_PowerSource, eVehicleType i_VehicleType)
             : base(i_ModelName, i_LicencePlate, i_Wheels, i_PowerSource, i_VehicleType)
         {
@@ -40,11 +39,11 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             StringBuilder output = new StringBuilder(base.ToString());
+
             output.AppendLine(String.Format("Refrigerated contents: {0}", m_RefrigeratedContents));
             output.AppendLine(String.Format("Cargo volume: {0}", m_CargoVolume));
 
             return output.ToString();
         }
-
     }
 }

@@ -10,7 +10,6 @@ namespace Ex03.GarageLogic
         private readonly float r_MaxValue;
         private readonly float r_MinValue;
 
-
         public ValueOutOfRangeException(float i_MaxValue, float i_MinValue)
            : base(string.Format("Value out of range, please use a value in the range of {0} to {1}", i_MaxValue, i_MinValue))
         {

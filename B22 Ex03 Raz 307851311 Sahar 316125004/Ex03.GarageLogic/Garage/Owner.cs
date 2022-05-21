@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Owner //Done.
+    public class Owner 
     {
         private string m_Name;
         private string m_PhoneNumber;
@@ -15,8 +15,6 @@ namespace Ex03.GarageLogic
             m_Name = i_Name;
             m_PhoneNumber = i_PhoneNumber;
         }
-
-
 
         public override string ToString()
         {
