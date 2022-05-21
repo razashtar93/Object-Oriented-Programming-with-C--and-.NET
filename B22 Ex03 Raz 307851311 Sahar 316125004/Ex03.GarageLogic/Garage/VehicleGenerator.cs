@@ -45,7 +45,6 @@ namespace Ex03.GarageLogic
         private const eFuelType k_TruckFuelType = eFuelType.Soler;
         private const float k_TruckTankFuel = 120f;
 
-
         public static Vehicle CreateVehicle(string i_ModelName, string i_LicencePlate, eVehicleType i_VehicleType, string i_WheelManufacturerName, float i_WheelCurrentAirPressure, float i_CurrentEnergy)
         {
             Vehicle newVehicle = null;
@@ -57,53 +56,41 @@ namespace Ex03.GarageLogic
                 case eVehicleType.FuelMotorcycle:
                     wheels = createWheels(k_FuelMotorcycleNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_FuelMotorcycleMaxAirPressureInWheels);
-
                     powerSource = new FuelPowerSource(k_FuelMotorcycleTankFuel, i_CurrentEnergy, k_FuelMotorcycleFuelType);
-
                     newVehicle = new Motorcycle(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.ElectricMotorcycle:
                     wheels = createWheels(k_ElectricMotorcycleNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_ElectricMotorcycleMaxAirPressureInWheels);
-
                     powerSource = new ElectricPowerSource(k_ElectricMotorcycleMaximumBatteryLife, i_CurrentEnergy);
-
                     newVehicle = new Motorcycle(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.FualCar:
                     wheels = createWheels(k_FualCarNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_FualCarMaxAirPressureInWheels);
-
                     powerSource = new FuelPowerSource(k_FualCarTankFuel, i_CurrentEnergy, k_FualCarFuelType);
-
                     newVehicle = new Car(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.ElectricCar:
                     wheels = createWheels(k_ElectricCarNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_ElectricCarMaxAirPressureInWheels);
-
                     powerSource = new ElectricPowerSource(k_ElectricCarMaximumBatteryLife, i_CurrentEnergy);
-
                     newVehicle = new Car(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.Truck:
                     wheels = createWheels(k_TruckNumberOfWheels, i_WheelManufacturerName,
                        i_WheelCurrentAirPressure, k_TruckMaxAirPressureInWheels);
-
                     powerSource = new FuelPowerSource(k_TruckTankFuel, i_CurrentEnergy, k_TruckFuelType);
-
                     newVehicle = new Truck(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
             }
 
             return newVehicle;
         }
-
-
 
         private static Wheel[] createWheels(int i_NumberOfWheels, string i_WheelManufacturerName, float i_WheelCurrentAirPressure, float i_MaxAirPressure)
         {
@@ -115,9 +102,7 @@ namespace Ex03.GarageLogic
             }
 
             return wheels;
-
         }
-
 
         public static float GetVehicleMaxEnergy(eVehicleType i_VehicleType)
         {
@@ -149,7 +134,6 @@ namespace Ex03.GarageLogic
             return maxEnergy;
         }
 
-
         public static float GetVehicleMaxAirPressurre(eVehicleType i_VehicleType)
         {
             float maxAir = 0;
@@ -168,8 +152,6 @@ namespace Ex03.GarageLogic
                     maxAir = k_FualCarMaxAirPressureInWheels;
                     break;
 
-
-
                 case eVehicleType.ElectricCar:
                     maxAir = k_ElectricCarMaxAirPressureInWheels;
                     break;
@@ -181,11 +163,5 @@ namespace Ex03.GarageLogic
 
             return maxAir;
         }
-
-
-
-
-
-
     }
 }

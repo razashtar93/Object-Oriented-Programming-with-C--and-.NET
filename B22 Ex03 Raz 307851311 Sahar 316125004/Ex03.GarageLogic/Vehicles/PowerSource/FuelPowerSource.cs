@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic
             get { return r_FuelType; }
         }
 
-        public void Refuel(float i_FuelLiters, eFuelType i_FuelType) 
+        public void Refuel(float i_FuelLiters, eFuelType i_FuelType)
         {
             float howMuchMoreFuelForMaxTank = HowMuchLeftForMaxEnergy();
 
@@ -40,8 +40,5 @@ namespace Ex03.GarageLogic
             return string.Format("fuel type: {0} , Current fuel liters in the tank: {1} , max liters: {2}"
                 , r_FuelType, CurrentEnergy, MaxEnergy);
         }
-
-
-       
     }
 }

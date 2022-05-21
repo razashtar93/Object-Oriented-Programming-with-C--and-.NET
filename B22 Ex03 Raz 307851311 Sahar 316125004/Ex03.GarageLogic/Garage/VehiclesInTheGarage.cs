@@ -33,7 +33,5 @@ namespace Ex03.GarageLogic.Garage
             get { return m_VehicleStatus; }
             set { m_VehicleStatus = value; }
         }
-
-
     }
 }

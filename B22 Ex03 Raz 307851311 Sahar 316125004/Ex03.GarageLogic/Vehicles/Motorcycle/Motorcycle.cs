@@ -10,7 +10,6 @@ namespace Ex03.GarageLogic
         private eLicenceType m_LicenceType;
         private int m_EngineCapacity;
 
-
         public Motorcycle(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheel, PowerSource i_PowerSource, VehicleGenerator.eVehicleType i_VehicleType)
             : base(i_ModelName, i_LicencePlate, i_Wheel, i_PowerSource, i_VehicleType)
         {
@@ -40,6 +39,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             StringBuilder output = new StringBuilder(base.ToString());
+
             output.AppendLine(String.Format("Licence type : {0}", m_LicenceType));
             output.AppendLine(String.Format("Engine capacity: {0}", m_EngineCapacity));
 

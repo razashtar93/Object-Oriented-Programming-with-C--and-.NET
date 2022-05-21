@@ -6,14 +6,13 @@ using static Ex03.GarageLogic.VehicleGenerator;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Vehicle // Maybe Done.
+    public abstract class Vehicle 
     {
         private readonly string r_ModelName;
         private readonly string r_LicencePlate;
         private readonly Wheel[] r_Wheels;
         private PowerSource m_PowerSource;
         private readonly eVehicleType r_VehicleType;
-
 
         protected Vehicle(string i_ModelName, string i_LicencePlate, Wheel[] i_Wheels, PowerSource i_PowerSource, eVehicleType i_VehicleType)
         {
@@ -23,7 +22,6 @@ namespace Ex03.GarageLogic
             this.m_PowerSource = i_PowerSource;
             this.r_VehicleType = i_VehicleType;
         }
-
 
         public string ModelName
         {
@@ -51,7 +49,6 @@ namespace Ex03.GarageLogic
             get { return r_VehicleType; }
         }
 
-
         public override string ToString()
         {
             string wheels = wheelsToString(Wheels);
@@ -71,16 +68,18 @@ Power source info:
         private string wheelsToString(Wheel[] i_Wheels)
         {
             StringBuilder outputstringWheels = new StringBuilder();
+
             outputstringWheels.AppendLine("Manufacturer Name: " + i_Wheels[0].ManufacturerName);
+            int i = 1;
 
             foreach (Wheel wheel in i_Wheels)
             {
+                outputstringWheels.AppendLine("Wheel Number: " + i);
                 outputstringWheels.AppendLine(wheel.ToString());
+                i++;
             }
 
             return outputstringWheels.ToString();
         }
-
-
     }
 }
