@@ -39,7 +39,6 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             StringBuilder output = new StringBuilder(base.ToString());
-
             output.AppendLine(String.Format("Licence type : {0}", m_LicenceType));
             output.AppendLine(String.Format("Engine capacity: {0}", m_EngineCapacity));
 
