@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Battery current hours: {0} , Battery max hours: {1} , Battery Energy Precent: {2}%", base.CurrentEnergy, base.MaxEnergy, base.PowerEnergyPercent);
+            return string.Format("Battery current hours: {0} , max hours: {1}", CurrentEnergy, MaxEnergy);
         }
     }
 }

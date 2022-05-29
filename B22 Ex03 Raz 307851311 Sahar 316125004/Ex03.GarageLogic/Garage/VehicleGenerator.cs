@@ -54,92 +54,47 @@ namespace Ex03.GarageLogic
             switch (i_VehicleType)
             {
                 case eVehicleType.FuelMotorcycle:
-
-                    if (i_WheelCurrentAirPressure > k_FuelMotorcycleMaxAirPressureInWheels || i_WheelCurrentAirPressure < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_FuelMotorcycleMaxAirPressureInWheels, 0);
-                    }
-
-                    if (i_CurrentEnergy > k_FuelMotorcycleTankFuel || i_CurrentEnergy < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_FuelMotorcycleTankFuel, 0);
-                    }
-
                     wheels = createWheels(k_FuelMotorcycleNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_FuelMotorcycleMaxAirPressureInWheels);
+
                     powerSource = new FuelPowerSource(k_FuelMotorcycleTankFuel, i_CurrentEnergy, k_FuelMotorcycleFuelType);
+
                     newVehicle = new Motorcycle(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.ElectricMotorcycle:
-
-                    if (i_WheelCurrentAirPressure > k_ElectricMotorcycleMaxAirPressureInWheels || i_WheelCurrentAirPressure < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_ElectricMotorcycleMaxAirPressureInWheels, 0);
-                    }
-
-                    if (i_CurrentEnergy > k_ElectricMotorcycleMaximumBatteryLife || i_CurrentEnergy < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_ElectricMotorcycleMaximumBatteryLife, 0);
-                    }
-
                     wheels = createWheels(k_ElectricMotorcycleNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_ElectricMotorcycleMaxAirPressureInWheels);
+
                     powerSource = new ElectricPowerSource(k_ElectricMotorcycleMaximumBatteryLife, i_CurrentEnergy);
+
                     newVehicle = new Motorcycle(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.FualCar:
-
-                    if (i_WheelCurrentAirPressure > k_FualCarMaxAirPressureInWheels || i_WheelCurrentAirPressure < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_FualCarMaxAirPressureInWheels, 0);
-                    }
-
-                    if (i_CurrentEnergy > k_FualCarTankFuel || i_CurrentEnergy < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_FualCarTankFuel, 0);
-                    }
-
                     wheels = createWheels(k_FualCarNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_FualCarMaxAirPressureInWheels);
+
                     powerSource = new FuelPowerSource(k_FualCarTankFuel, i_CurrentEnergy, k_FualCarFuelType);
+
                     newVehicle = new Car(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.ElectricCar:
-
-                    if (i_WheelCurrentAirPressure > k_ElectricCarMaxAirPressureInWheels || i_WheelCurrentAirPressure < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_ElectricCarMaxAirPressureInWheels, 0);
-                    }
-
-                    if (i_CurrentEnergy > k_ElectricCarMaximumBatteryLife || i_CurrentEnergy < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_ElectricCarMaximumBatteryLife, 0);
-                    }
-
                     wheels = createWheels(k_ElectricCarNumberOfWheels, i_WheelManufacturerName,
                         i_WheelCurrentAirPressure, k_ElectricCarMaxAirPressureInWheels);
+
                     powerSource = new ElectricPowerSource(k_ElectricCarMaximumBatteryLife, i_CurrentEnergy);
+
                     newVehicle = new Car(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
 
                 case eVehicleType.Truck:
-
-                    if (i_WheelCurrentAirPressure > k_TruckMaxAirPressureInWheels || i_WheelCurrentAirPressure < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_TruckMaxAirPressureInWheels, 0);
-                    }
-
-                    if (i_CurrentEnergy > k_TruckTankFuel || i_CurrentEnergy < 0)
-                    {
-                        throw new ValueOutOfRangeException(k_TruckTankFuel, 0);
-                    }
-
                     wheels = createWheels(k_TruckNumberOfWheels, i_WheelManufacturerName,
                        i_WheelCurrentAirPressure, k_TruckMaxAirPressureInWheels);
+
                     powerSource = new FuelPowerSource(k_TruckTankFuel, i_CurrentEnergy, k_TruckFuelType);
+
                     newVehicle = new Truck(i_ModelName, i_LicencePlate, wheels, powerSource, i_VehicleType);
                     break;
             }
@@ -157,6 +112,7 @@ namespace Ex03.GarageLogic
             }
 
             return wheels;
+
         }
 
         public static float GetVehicleMaxEnergy(eVehicleType i_VehicleType)

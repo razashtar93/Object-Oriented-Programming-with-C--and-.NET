@@ -69,17 +69,13 @@ Power source info:
         {
             StringBuilder outputstringWheels = new StringBuilder();
 
-            outputstringWheels.AppendLine("Manufacturer Name: " + i_Wheels[0].ManufacturerName);
-            int i = 1;
-
             foreach (Wheel wheel in i_Wheels)
             {
-                outputstringWheels.AppendLine("Wheel Number: " + i);
                 outputstringWheels.AppendLine(wheel.ToString());
-                i++;
             }
 
             return outputstringWheels.ToString();
         }
+
     }
 }

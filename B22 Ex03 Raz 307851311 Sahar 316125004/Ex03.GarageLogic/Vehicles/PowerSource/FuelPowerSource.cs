@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic
             get { return r_FuelType; }
         }
 
-        public void Refuel(float i_FuelLiters, eFuelType i_FuelType)
+        public void Refuel(float i_FuelLiters, eFuelType i_FuelType) 
         {
             float howMuchMoreFuelForMaxTank = HowMuchLeftForMaxEnergy();
 
