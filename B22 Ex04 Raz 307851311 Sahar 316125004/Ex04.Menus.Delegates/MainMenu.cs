@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ex04.Menus.Interfaces
+namespace Ex04.Menus.Delegates
 {
     public class MainMenu : IMenuItem
     {
         private string m_Title;
         private readonly List<IMenuItem> r_MenuItemList;
 
-
         public MainMenu(string i_Title)
         {
-            m_Title = i_Title;
+            this.m_Title = i_Title;
             this.r_MenuItemList = new List<IMenuItem>();
         }
 
