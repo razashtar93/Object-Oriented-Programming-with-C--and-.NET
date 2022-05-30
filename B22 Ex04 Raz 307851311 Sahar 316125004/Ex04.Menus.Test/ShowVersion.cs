@@ -6,11 +6,11 @@ using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
-    public class ShowVersion : IActionListener
+    public class ShowVersion : IActionExcecution
     {
         public void Run()
         {
-            Console.WriteLine("Version: 22.2.4.8950");
+            Console.WriteLine("Version: 22.2.4.8950\n");
         }
     }
 }
