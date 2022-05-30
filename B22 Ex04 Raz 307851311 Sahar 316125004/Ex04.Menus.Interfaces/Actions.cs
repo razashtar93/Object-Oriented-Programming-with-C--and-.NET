@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class Action : IMenuItem
+    public class Actions : IMenuItem
     {
         private string m_Title;
         private readonly List<IActionExcecution> r_ActionList;
 
-        public Action(string i_Title)
+        public Actions(string i_Title)
         {
-            m_Title = i_Title;
+            this.m_Title = i_Title;
             this.r_ActionList = new List<IActionExcecution>();
         }
 

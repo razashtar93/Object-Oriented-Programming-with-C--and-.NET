@@ -35,7 +35,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Action.cs" />
+    <Compile Include="Actions.cs" />
     <Compile Include="IActionExcecution.cs" />
     <Compile Include="IMenuItem.cs" />
     <Compile Include="MainMenu.cs" />

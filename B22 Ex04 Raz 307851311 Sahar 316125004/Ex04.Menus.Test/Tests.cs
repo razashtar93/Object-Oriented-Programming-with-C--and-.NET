@@ -2,52 +2,89 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ex04.Menus.Interfaces;
-
 
 namespace Ex04.Menus.Test
 {
     public class Tests
     {
-        private MainMenu m_MainMenu;
+        private Delegates.MainMenu m_DelegatesMainMenu;
+        private Interfaces.MainMenu m_InterfacesMainMenu;
 
         public void Run()
         {
-            //delegateMenuTest();
+            delegateMenuTest();
             Console.Clear();
             interfaceMenuTest();
         }
 
-        private void interfaceMenuTest()
+        private void delegateMenuTest()
         {
-            m_MainMenu = createInterfaceMenu();
-            m_MainMenu.Show();
+            m_DelegatesMainMenu = createDelegatesMenu();
+            m_DelegatesMainMenu.Show();
         }
 
-        private MainMenu createInterfaceMenu()
+        private void interfaceMenuTest()
         {
-            MainMenu mainMenu = new MainMenu("**Interfaces Main Menu**");
-            SubMenu subMenuShowDateOrTime = new SubMenu("Show Date/Time");
-            SubMenu subMenuVersionAndSpaces = new SubMenu("Version and Spaces");
+            m_InterfacesMainMenu = createInterfaceMenu();
+            m_InterfacesMainMenu.Show();
+        }
+
+        private Delegates.MainMenu createDelegatesMenu()
+        {
+            Delegates.MainMenu mainMenu = new Delegates.MainMenu("**Delegates Main Menu**");
+            Delegates.SubMenu subMenuShowDateOrTime = new Delegates.SubMenu("Show Date/Time");
+            Delegates.SubMenu subMenuVersionAndSpaces = new Delegates.SubMenu("Version and Spaces");
 
             mainMenu.AddMenuItem(subMenuShowDateOrTime);
             mainMenu.AddMenuItem(subMenuVersionAndSpaces);
 
             //item 1
-            Interfaces.Action ShowTime = new Interfaces.Action("Show Time");
+            Delegates.Actions ShowTime = new Delegates.Actions("Show Time");
+            ShowTime.m_EventHandler += new ShowTime().Run;
+
+            Delegates.Actions ShowDate = new Delegates.Actions("Show Date");
+            ShowDate.m_EventHandler += new ShowDate().Run;
+
+            subMenuShowDateOrTime.AddMenuItem(ShowTime);
+            subMenuShowDateOrTime.AddMenuItem(ShowDate);
+
+            //item 2
+            Delegates.Actions CountSpacesAction = new Delegates.Actions("Count Spaces");
+            CountSpacesAction.m_EventHandler += new CountSpaces().Run;
+
+            Delegates.Actions ShowVersion = new Delegates.Actions("Show Version");
+            ShowVersion.m_EventHandler += new ShowVersion().Run;
+
+            subMenuVersionAndSpaces.AddMenuItem(CountSpacesAction);
+            subMenuVersionAndSpaces.AddMenuItem(ShowVersion);
+
+            return mainMenu;
+        }
+
+        private Interfaces.MainMenu createInterfaceMenu()
+        {
+            Interfaces.MainMenu mainMenu = new Interfaces.MainMenu("**Interfaces Main Menu**");
+            Interfaces.SubMenu subMenuShowDateOrTime = new Interfaces.SubMenu("Show Date/Time");
+            Interfaces.SubMenu subMenuVersionAndSpaces = new Interfaces.SubMenu("Version and Spaces");
+
+            mainMenu.AddMenuItem(subMenuShowDateOrTime);
+            mainMenu.AddMenuItem(subMenuVersionAndSpaces);
+
+            //item 1
+            Interfaces.Actions ShowTime = new Interfaces.Actions("Show Time");
             ShowTime.AddActionItem(new ShowTime());
 
-            Interfaces.Action ShowDate = new Interfaces.Action("Show Date");
+            Interfaces.Actions ShowDate = new Interfaces.Actions("Show Date");
             ShowDate.AddActionItem(new ShowDate());
 
             subMenuShowDateOrTime.AddMenuItem(ShowTime);
             subMenuShowDateOrTime.AddMenuItem(ShowDate);
 
             //item 2
-            Interfaces.Action CountSpacesAction = new Interfaces.Action("Count Spaces");
+            Interfaces.Actions CountSpacesAction = new Interfaces.Actions("Count Spaces");
             CountSpacesAction.AddActionItem(new CountSpaces());
 
-            Interfaces.Action ShowVersion = new Interfaces.Action("Show Version");
+            Interfaces.Actions ShowVersion = new Interfaces.Actions("Show Version");
             ShowVersion.AddActionItem(new ShowVersion());
 
             subMenuVersionAndSpaces.AddMenuItem(CountSpacesAction);

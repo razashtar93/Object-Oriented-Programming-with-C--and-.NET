@@ -10,12 +10,6 @@ namespace Ex04.Menus.Test
     {
         public void Run()
         {
-            SpacesCounter();
-
-        }
-
-        private void SpacesCounter()
-        {
             Console.WriteLine("Please enter your sentence:");
             string userInput = Console.ReadLine();
             int numberOfSpaces = userInput.Count(f => (f == ' '));
