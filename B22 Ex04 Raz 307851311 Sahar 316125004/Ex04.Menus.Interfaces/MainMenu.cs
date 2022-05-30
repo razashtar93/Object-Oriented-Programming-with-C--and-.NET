@@ -23,14 +23,14 @@ namespace Ex04.Menus.Interfaces
             set { m_Title = value; }
         }
 
-        public void AddMenuItem(IMenuItem i_menuItem)
+        public void AddMenuItem(IMenuItem i_MenuItem)
         {
-            r_ItemList.Add(i_menuItem);
+            r_ItemList.Add(i_MenuItem);
         }
 
-        public void RemoveMenuItem(IMenuItem i_menuItem)
+        public void RemoveMenuItem(IMenuItem i_MenuItem)
         {
-            r_ItemList.Remove(i_menuItem);
+            r_ItemList.Remove(i_MenuItem);
         }
 
         public void Choose()
