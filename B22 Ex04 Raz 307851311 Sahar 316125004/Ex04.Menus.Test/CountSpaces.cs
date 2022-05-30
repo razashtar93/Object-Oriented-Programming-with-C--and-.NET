@@ -16,10 +16,10 @@ namespace Ex04.Menus.Test
 
         private void SpacesCounter()
         {
-            Console.WriteLine("Please write some sentence:");
+            Console.WriteLine("Please enter your sentence:");
             string userInput = Console.ReadLine();
             int numberOfSpaces = userInput.Count(f => (f == ' '));
-            Console.WriteLine(String.Format("Number of spaces: {0}", numberOfSpaces));
+            Console.WriteLine(String.Format("There are {0} Spaces in your sentence.\n", numberOfSpaces));
         }
     }
 }

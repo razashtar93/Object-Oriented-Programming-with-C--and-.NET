@@ -8,13 +8,13 @@ namespace Ex04.Menus.Interfaces
     public class MainMenu : IMenuItem
     {
         private string m_Title;
-        private readonly List<IMenuItem> r_ItemList;
+        private readonly List<IMenuItem> r_MenuItemList;
 
 
         public MainMenu(string i_Title)
         {
             m_Title = i_Title;
-            this.r_ItemList = new List<IMenuItem>();
+            this.r_MenuItemList = new List<IMenuItem>();
         }
 
         public string Title
@@ -25,12 +25,12 @@ namespace Ex04.Menus.Interfaces
 
         public void AddMenuItem(IMenuItem i_MenuItem)
         {
-            r_ItemList.Add(i_MenuItem);
+            r_MenuItemList.Add(i_MenuItem);
         }
 
         public void RemoveMenuItem(IMenuItem i_MenuItem)
         {
-            r_ItemList.Remove(i_MenuItem);
+            r_MenuItemList.Remove(i_MenuItem);
         }
 
         public void Choose()
@@ -48,7 +48,7 @@ namespace Ex04.Menus.Interfaces
                 Console.WriteLine(Title);
                 Console.WriteLine(seperator);
                 printOptions();
-                int numberOfOptions = r_ItemList.Count;
+                int numberOfOptions = r_MenuItemList.Count;
                 Console.WriteLine(string.Format("Enter your request: (1 to {0} or press '0' to {1}).", numberOfOptions, ExitOrBack()));
                 int userInput = getValidateInput(numberOfOptions);
                 Console.Clear();
@@ -59,7 +59,7 @@ namespace Ex04.Menus.Interfaces
                 }
                 else
                 {
-                    r_ItemList.ElementAt(userInput - 1).Choose();
+                    r_MenuItemList.ElementAt(userInput - 1).Choose();
                 }
             }
         }
@@ -69,7 +69,7 @@ namespace Ex04.Menus.Interfaces
             int index = 1;
             StringBuilder options = new StringBuilder();
 
-            foreach (IMenuItem menuItem in r_ItemList)
+            foreach (IMenuItem menuItem in r_MenuItemList)
             {
                 options.AppendLine(String.Format("{0} -> {1}", index, menuItem.Title));
                 index++;
@@ -96,7 +96,7 @@ namespace Ex04.Menus.Interfaces
 
             while (!int.TryParse(userInput, out number) || number > i_NumberOfOptions || number < 0)
             {
-                Console.WriteLine(string.Format("Please choose integer number betwwen 0 to {0}", i_NumberOfOptions));
+                Console.WriteLine(string.Format("Please choose integer between 0 to {0}", i_NumberOfOptions));
                 userInput = Console.ReadLine();
             }
 
