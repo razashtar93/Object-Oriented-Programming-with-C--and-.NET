@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ex04.Menus.Interfaces;
+
 
 namespace Ex04.Menus.Test
 {
@@ -9,22 +11,22 @@ namespace Ex04.Menus.Test
     {
         public void Run()
         {
-            //runDelegateMenu();
+            //delegateMenuTest();
             Console.Clear();
-            runInterfaceMenu();
+            interfaceMenuTest();
         }
 
-        private void runInterfaceMenu()
+        private void interfaceMenuTest()
         {
-            Interfaces.MainMenu mainMenu = createInterfaceMenu();
+            MainMenu mainMenu = createInterfaceMenu();
             mainMenu.Show();
         }
 
-        private Interfaces.MainMenu createInterfaceMenu()
+        private MainMenu createInterfaceMenu()
         {
-            Interfaces.MainMenu mainMenu = new Interfaces.MainMenu("**Interfaces Main Menu**");
-            Interfaces.SubMenu subMenuShowDateOrTime = new Interfaces.SubMenu("Show Date/Time");
-            Interfaces.SubMenu subMenuVersionAndSpaces = new Interfaces.SubMenu("Version and Spaces");
+            MainMenu mainMenu = new MainMenu("**Interfaces Main Menu**");
+            SubMenu subMenuShowDateOrTime = new SubMenu("Show Date/Time");
+            SubMenu subMenuVersionAndSpaces = new SubMenu("Version and Spaces");
 
             mainMenu.AddMenuItem(subMenuShowDateOrTime);
             mainMenu.AddMenuItem(subMenuVersionAndSpaces);
