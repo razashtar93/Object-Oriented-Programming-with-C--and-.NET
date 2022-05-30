@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Action.cs" />
-    <Compile Include="IActionListener.cs" />
+    <Compile Include="IActionExcecution.cs" />
     <Compile Include="IMenuItem.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="SubMenu.cs" />

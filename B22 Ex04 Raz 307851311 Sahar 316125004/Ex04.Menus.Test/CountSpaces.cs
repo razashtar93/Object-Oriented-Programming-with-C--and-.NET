@@ -6,7 +6,7 @@ using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
-    public class CountSpaces : IActionListener
+    public class CountSpaces : IActionExcecution
     {
         public void Run()
         {

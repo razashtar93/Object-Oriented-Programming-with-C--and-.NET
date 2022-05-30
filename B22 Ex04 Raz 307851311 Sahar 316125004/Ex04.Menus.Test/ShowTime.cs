@@ -6,12 +6,12 @@ using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
-    public class ShowTime : IActionListener
+    public class ShowTime : IActionExcecution
     {
         public void Run()
         {
             DateTime date = DateTime.Now;
-            Console.WriteLine(date.TimeOfDay);
+            Console.WriteLine(date.TimeOfDay + "\n");
         }
     }
 }

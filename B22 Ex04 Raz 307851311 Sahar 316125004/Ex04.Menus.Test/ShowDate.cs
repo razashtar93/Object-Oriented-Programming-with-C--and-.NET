@@ -6,13 +6,13 @@ using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
-    public class ShowDate : IActionListener
+    public class ShowDate : IActionExcecution
     {
         public void Run()
         {
             string output = DateTime.Now.Date.ToString();
             int seperatorIndex = output.IndexOf(" ");
-            Console.WriteLine(output.Substring(0, seperatorIndex));
+            Console.WriteLine(output.Substring(0, seperatorIndex) + "\n");
         }
     }
 }

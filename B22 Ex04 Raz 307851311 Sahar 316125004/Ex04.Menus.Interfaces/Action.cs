@@ -8,12 +8,12 @@ namespace Ex04.Menus.Interfaces
     public class Action : IMenuItem
     {
         private string m_Title;
-        private readonly List<IActionListener> r_ActionList;
+        private readonly List<IActionExcecution> r_ActionList;
 
         public Action(string i_Title)
         {
             m_Title = i_Title;
-            this.r_ActionList = new List<IActionListener>();
+            this.r_ActionList = new List<IActionExcecution>();
         }
 
         public string Title
@@ -22,12 +22,12 @@ namespace Ex04.Menus.Interfaces
             set { m_Title = value; }
         }
 
-        public void AddActionItem(IActionListener i_ActionItem)
+        public void AddActionItem(IActionExcecution i_ActionItem)
         {
             r_ActionList.Add(i_ActionItem);
         }
 
-        public void RemoveActionItem(IActionListener i_ActionItem)
+        public void RemoveActionItem(IActionExcecution i_ActionItem)
         {
             r_ActionList.Remove(i_ActionItem);
         }
@@ -36,7 +36,7 @@ namespace Ex04.Menus.Interfaces
         {
             Console.Clear();
 
-            foreach (IActionListener actionItem in r_ActionList)
+            foreach (IActionExcecution actionItem in r_ActionList)
             {
                 actionItem.Run();
             }

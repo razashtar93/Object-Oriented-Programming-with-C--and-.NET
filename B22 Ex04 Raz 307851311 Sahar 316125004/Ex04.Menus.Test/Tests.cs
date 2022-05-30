@@ -9,6 +9,8 @@ namespace Ex04.Menus.Test
 {
     public class Tests
     {
+        private MainMenu m_MainMenu;
+
         public void Run()
         {
             //delegateMenuTest();
@@ -18,8 +20,8 @@ namespace Ex04.Menus.Test
 
         private void interfaceMenuTest()
         {
-            MainMenu mainMenu = createInterfaceMenu();
-            mainMenu.Show();
+            m_MainMenu = createInterfaceMenu();
+            m_MainMenu.Show();
         }
 
         private MainMenu createInterfaceMenu()
