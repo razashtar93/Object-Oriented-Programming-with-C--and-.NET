@@ -473,7 +473,7 @@ namespace B22_Ex05
             return isWon;
         }
 
-        public bool IfIndexOutOfBounds(int row, int column)
+        public bool IndexOutOfBounds(int row, int column)
         {
             return row >= 0 && row < m_SizeOfBoard && column >= 0 && column < m_SizeOfBoard;
         }

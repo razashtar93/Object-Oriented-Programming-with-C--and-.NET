@@ -30,7 +30,7 @@ namespace B22_Ex05
 
             m_BoardSize = ConsoleInputValidation.GetSizeOfBoard();
             m_GameBoard = new Board(m_BoardSize);
-            m_Board = m_GameBoard.GetBoard;
+            //m_Board = m_GameBoard.GetBoard;
 
             string playerOneName = ConsoleInputValidation.GetPlayerName();
             m_Player1 = new Player(playerOneName);
@@ -54,16 +54,16 @@ namespace B22_Ex05
         public void Run()
         {
             bool playerWantToQuit = false;
-            VisualBoard.ShowBoard(m_Board);
-            ConsoleMessages.HowToPlayMessage();
-            ConsoleMessages.PrintPlayerTurn(m_Player1.Name, k_SignOfPlayer1);
+            VisualBoard.ShowBoard(m_Board); //TODO: need to send here m_GameBoard.GetBoard
+           // ConsoleMessages.HowToPlayMessage();
+           // ConsoleMessages.PrintPlayerTurn(m_Player1.Name, k_SignOfPlayer1);
 
             while (v_GameAlive)
             {
                 playerWantToQuit = playerOneMove();
                 VisualBoard.ShowBoard(m_Board);
-                ConsoleMessages.PrintPlayerMove(m_UserInput, m_Player1.Name, k_SignOfPlayer1);
-                ConsoleMessages.PrintPlayerTurn(m_Player2.Name, k_SignOfPlayer2);
+               // ConsoleMessages.PrintPlayerMove(m_UserInput, m_Player1.Name, k_SignOfPlayer1);
+               // ConsoleMessages.PrintPlayerTurn(m_Player2.Name, k_SignOfPlayer2);
 
                 if (isWonOrDraw(m_Player1, m_Player2) || playerWantToQuit)
                 {
@@ -92,11 +92,11 @@ namespace B22_Ex05
             }
         }
 
-        private bool playerOneMove()
+        private bool playerOneMove() //the user input here is from the GameForm!
         {
             bool playerWantToQuit = false;
             string userInput = Console.ReadLine();
-            m_UserInput = ConsoleInputValidation.GetUserMove(m_BoardSize, userInput);
+           // m_UserInput = ConsoleInputValidation.GetUserMove(m_BoardSize, userInput);
 
             if (m_UserInput == "q" || m_UserInput == "Q")
             {
