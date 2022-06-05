@@ -11,7 +11,7 @@ namespace B22_Ex05
 {
     public partial class GameSetupForm : Form
     {
-        private int m_BoardSize;
+        private int m_BoardSize = 6;
 
         public GameSetupForm()
         {
@@ -35,7 +35,7 @@ namespace B22_Ex05
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void Player2_CheckedChanged(object sender, EventArgs e)
@@ -93,6 +93,11 @@ namespace B22_Ex05
         public int GetBoardSize
         {
             get { return m_BoardSize; }
+        }
+
+        private void textBoxPlayer1_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

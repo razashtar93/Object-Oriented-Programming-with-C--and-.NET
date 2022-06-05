@@ -58,6 +58,7 @@ namespace B22_Ex05
             this.textBoxPlayer1.Name = "textBoxPlayer1";
             this.textBoxPlayer1.Size = new System.Drawing.Size(170, 26);
             this.textBoxPlayer1.TabIndex = 6;
+            this.textBoxPlayer1.TextChanged += new System.EventHandler(this.textBoxPlayer1_TextChanged);
             // 
             // LabelPlayers
             // 
@@ -76,7 +77,6 @@ namespace B22_Ex05
             this.LabelPlayer1.Size = new System.Drawing.Size(69, 20);
             this.LabelPlayer1.TabIndex = 5;
             this.LabelPlayer1.Text = "Player 1:";
-            this.LabelPlayer1.Visible = false;
             this.LabelPlayer1.Click += new System.EventHandler(this.label2_Click);
             // 
             // radioButton6x6
@@ -143,12 +143,12 @@ namespace B22_Ex05
             // 
             // textBoxPlayer2
             // 
+            this.textBoxPlayer2.Enabled = false;
             this.textBoxPlayer2.Location = new System.Drawing.Point(149, 188);
             this.textBoxPlayer2.Name = "textBoxPlayer2";
             this.textBoxPlayer2.Size = new System.Drawing.Size(170, 26);
             this.textBoxPlayer2.TabIndex = 8;
             this.textBoxPlayer2.Text = "[Computer]";
-            this.textBoxPlayer2.Visible = false;
             this.textBoxPlayer2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // GameSetupForm

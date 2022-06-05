@@ -8,24 +8,21 @@ namespace B22_Ex05
 {
     public class Game
     {
-        public bool v_GameAlive;
         public int m_BoardSize;
         public bool v_PlayerVsPlayerMode = false;
         private Board m_GameBoard = null;
-        private BoardCell[,] m_Board = null;
         public Player m_Player1, m_Player2;
-        private string m_UserInput;
         private const int k_SignOfPlayer1 = 1;
         private const int k_SignOfPlayer2 = 2;
         private Random m_Rand;
+        private GameForm m_GameForm;
 
         public Game()
-        {
-            v_GameAlive = true;
+        {       
             InitGame();
         }
 
-        public void InitGame()//TODO: Raz started working on this function!
+        public void InitGame()
         {
             GameSetupForm setupForm = new GameSetupForm();
             DialogResult dialogResult = setupForm.ShowDialog();
@@ -34,11 +31,11 @@ namespace B22_Ex05
             {
                 m_BoardSize = setupForm.GetBoardSize;
                 m_GameBoard = new Board(m_BoardSize);
-                m_Player1 = new Player("player 1");
+                m_Player1 = new Player(setupForm.GetFirstPlayerName);
 
                 if (setupForm.PlayAgainstHuman)
                 {
-                    m_Player2 = new Player("Player 2");
+                    m_Player2 = new Player(setupForm.GetSecondPlayerName);
                     v_PlayerVsPlayerMode = true;
                 }
                 else
@@ -47,225 +44,108 @@ namespace B22_Ex05
                     m_Rand = new Random();
                 }
 
-                GameForm gameForm = new GameForm(m_BoardSize, m_Player1.Name, m_Player2.Name);
-                gameForm.ShowDialog();
+                m_GameForm = new GameForm(this, m_BoardSize, m_Player1.Name, m_Player2.Name);
             }
+        }
 
-
-
-
-
-
-            //ConsoleMessages.OpenStatement();
-
-            //m_BoardSize = ConsoleInputValidation.GetSizeOfBoard();
-            //m_GameBoard = new Board(m_BoardSize);
-            ////m_Board = m_GameBoard.GetBoard;
-
-            //string playerOneName = ConsoleInputValidation.GetPlayerName();
-            //m_Player1 = new Player(playerOneName);
-
-            // int opponentChoise = ConsoleInputValidation.GetOpponentChoise();
-
-            //if (opponentChoise == 1)
-            //{
-            //    m_Player2 = new Player("Computer");
-            //    m_Rand = new Random();
-            //}
-            //else
-            //{
-            //    m_Player2 = new Player(ConsoleInputValidation.GetPlayerName());
-            //    v_PlayerVsPlayerMode = true;
-            //}
-
-            //ConsoleMessages.LetsPlay();
+        public Board GetBoard
+        {
+            get { return m_GameBoard; }
         }
 
         public void Run()
         {
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            //bool playerWantToQuit = false;
-            VisualBoard.ShowBoard(m_Board); //TODO: need to send here m_GameBoard.GetBoard
-                                            // ConsoleMessages.HowToPlayMessage();
-                                            // ConsoleMessages.PrintPlayerTurn(m_Player1.Name, k_SignOfPlayer1);
+            m_GameForm.ShowDialog();
+        }
 
-            while (v_GameAlive)
+        public void Player1Move(string i_Player1Move) 
+        {
+            try
             {
-                playerWantToQuit = playerOneMove();
-                VisualBoard.ShowBoard(m_Board);
-                // ConsoleMessages.PrintPlayerMove(m_UserInput, m_Player1.Name, k_SignOfPlayer1);
-                // ConsoleMessages.PrintPlayerTurn(m_Player2.Name, k_SignOfPlayer2);
-
-                if (isWonOrDraw(m_Player1, m_Player2) || playerWantToQuit)
-                {
-                    break;
-                }
-
-                playerWantToQuit = playerTwoMove(); // player2 or computer 
-                VisualBoard.ShowBoard(m_Board);
-                ConsoleMessages.PrintPlayerMove(m_UserInput, m_Player2.Name, k_SignOfPlayer2);
-                ConsoleMessages.PrintPlayerTurn(m_Player1.Name, k_SignOfPlayer1);
-
-                if (isWonOrDraw(m_Player1, m_Player2) || playerWantToQuit)
-                {
-                    break;
-                }
+                m_GameBoard.MakeMove(i_Player1Move, k_SignOfPlayer1); 
             }
-
-            if (playAgain())
+            catch (ArgumentException e)
             {
-                resetGame();
-                Run();
-            }
-            else
-            {
-                endGame();
+                throw e;
             }
         }
 
-        private bool playerOneMove() //the user input here is from the GameForm!
+        public eGameResult isWonOrDraw()
         {
-            bool playerWantToQuit = false;
-            string userInput = Console.ReadLine();
-            // m_UserInput = ConsoleInputValidation.GetUserMove(m_BoardSize, userInput);
+            eGameResult gameResult = m_GameBoard.IsWon();
 
-            if (m_UserInput == "q" || m_UserInput == "Q")
-            {
-                playerWantsToQuit(k_SignOfPlayer1);
-                playerWantToQuit = true;
-            }
-            else
-            {
-                m_GameBoard.MakeMove(m_UserInput, k_SignOfPlayer1);
-            }
-
-            return playerWantToQuit;
-        }
-
-        private bool isWonOrDraw(Player i_Player1, Player i_Player2)
-        {
-            bool answer = false;
-
-            if (m_GameBoard.IsWon(i_Player1, i_Player2)) // print won message and calculate players score
-            {
-                answer = true;
-            }
-            else
+            if (gameResult == eGameResult.None) 
             {
                 if (!m_GameBoard.m_LeagalSingleMovesPlayer1.Any()
                     && !m_GameBoard.m_LeagalSingleMovesPlayer2.Any()
                     && !m_GameBoard.m_LeagalEatingMovesPlayer1.Any()
-                    && !m_GameBoard.m_LeagalEatingMovesPlayer2.Any()) // all lists are empty
-                { //there is a draw
-                    answer = true;
-                    ConsoleMessages.DrawStatement();
+                    && !m_GameBoard.m_LeagalEatingMovesPlayer2.Any())
+                {
+                    gameResult = eGameResult.Tie;
                 }
             }
-
-            return answer;
+           
+            return gameResult;
         }
 
-        private bool playerTwoMove()
+        public void Player2Move(string i_Player2Move)
         {
-            bool playerWantToQuit = false;
-
             if (!v_PlayerVsPlayerMode) // play against the computer
             {
                 if (m_GameBoard.m_LeagalEatingMovesPlayer2.Any()) // if not empty
                 {
                     int itemIndex = m_Rand.Next(m_GameBoard.m_LeagalEatingMovesPlayer2.Count);
                     string computerMove = m_GameBoard.m_LeagalEatingMovesPlayer2[itemIndex];
-                    m_UserInput = computerMove;
-                    m_GameBoard.MakeMove(m_UserInput, k_SignOfPlayer2);
+                    i_Player2Move = computerMove;
+                    m_GameBoard.MakeMove(i_Player2Move, k_SignOfPlayer2);
                 }
                 else
                 {
-                    if (m_GameBoard.m_LeagalSingleMovesPlayer2.Any())
+                    if (m_GameBoard.m_LeagalSingleMovesPlayer2.Any()) // if not empty
                     {
                         int itemIndex = m_Rand.Next(m_GameBoard.m_LeagalSingleMovesPlayer2.Count);
                         string computerMove = m_GameBoard.m_LeagalSingleMovesPlayer2[itemIndex];
-                        m_UserInput = computerMove;
-                        m_GameBoard.MakeMove(m_UserInput, k_SignOfPlayer2);
+                        i_Player2Move = computerMove;
+                        m_GameBoard.MakeMove(i_Player2Move, k_SignOfPlayer2);
                     }
-                    else
+                    else // no legal moves
                     {
                         playerWantsToQuit(k_SignOfPlayer2);
-                        playerWantToQuit = true;
                     }
                 }
             }
-            else
+            else // play against human
             {
-                string userInput = Console.ReadLine();
-                m_UserInput = ConsoleInputValidation.GetUserMove(m_BoardSize, userInput);
-
-                if (m_UserInput == "q" || m_UserInput == "Q")
+                try
                 {
-                    playerWantsToQuit(k_SignOfPlayer2);
-                    playerWantToQuit = true;
+                    m_GameBoard.MakeMove(i_Player2Move, k_SignOfPlayer2);
                 }
-                else
+                catch (ArgumentException e)
                 {
-                    m_GameBoard.MakeMove(m_UserInput, k_SignOfPlayer2);
+                    throw e;
+                    //throw new ArgumentException(e.Message);
                 }
             }
-
-            return playerWantToQuit;
         }
 
-        private void resetGame()
-        { // reset the game for another play
+        public void ResetGame()
+        { 
             m_GameBoard.ResetBoard();
-            v_GameAlive = true;
+            m_GameBoard.UpdateAllPlayerLegalMoves();
         }
 
-        private void endGame()
-        {
-            v_GameAlive = false;
-            ConsoleMessages.GoodByeMessage();
-            Console.ReadLine();
-        }
-
-        private bool playAgain()
-        {
-            string userResponseForPlayAgain = ConsoleInputValidation.GetUserResponseForPlayAgaine();
-            bool userAnswer;
-
-            if (userResponseForPlayAgain.ToLower() == "y")
-            {
-                userAnswer = true;
-            }
-            else
-            {
-                userAnswer = false;
-            }
-
-            return userAnswer;
-        }
-
-        private void playerWantsToQuit(int i_Player)
+        private void playerWantsToQuit(int i_Player) 
         {
             // update player soldier to zero and call IsWon()
             if (i_Player == k_SignOfPlayer1)
             {
                 m_GameBoard.m_Player1SoldiersCounter = 0;
-                m_GameBoard.IsWon(m_Player1, m_Player2);
+                m_GameBoard.IsWon();
             }
             else
             {
                 m_GameBoard.m_Player2SoldiersCounter = 0;
-                m_GameBoard.IsWon(m_Player1, m_Player2);
+                m_GameBoard.IsWon();
             }
         }
     }

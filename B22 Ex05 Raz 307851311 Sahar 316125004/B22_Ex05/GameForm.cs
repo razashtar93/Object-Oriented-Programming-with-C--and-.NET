@@ -11,6 +11,7 @@ namespace B22_Ex05
 {
     public partial class GameForm : Form
     {
+        private Game m_Game;
         private int m_BoardSize;
         private Button[,] m_BoardButton;
         private readonly string r_Player1Name;
@@ -19,9 +20,13 @@ namespace B22_Ex05
         private Label m_Player2Label;
         private int m_Player1Score;
         private int m_Player2Score;
+        private string m_Move;
+        private bool v_AnotherButtonClicked = false;
+        private bool v_Player1Turn = true;
 
-        public GameForm(int i_BoardSize, string i_Player1Name, string i_Player2Name)
+        public GameForm(Game i_Game, int i_BoardSize, string i_Player1Name, string i_Player2Name)
         {
+            this.m_Game = i_Game;
             this.m_BoardSize = i_BoardSize;
             this.r_Player1Name = i_Player1Name;
             this.r_Player2Name = i_Player2Name;
@@ -36,26 +41,45 @@ namespace B22_Ex05
             {
                 for (int j = 0; j < m_BoardSize; j++)
                 {
-                    m_BoardButton[i, j].Enabled = false;
-                    m_BoardButton[i, j].BackColor = ((i + j) % 2 == 0) ? Color.Gray : Color.White;
-                    //if (i % 2 == 0 && j % 2 == 0)
-                    //{
-                    //    m_BoardButton[i, j].Enabled = false;
-                    //    m_BoardButton[i, j].BackColor = Color.Gray;
-                    //}
+                    m_BoardButton[i, j].BackColor = ((i + j) % 2 == 0) ? Color.Black : Color.White;
+                    m_BoardButton[i, j].Enabled = !((i + j) % 2 == 0);
+                    m_BoardButton[i, j].FlatAppearance.BorderColor = Color.Black;
                 }
             }
         }
 
-        public void UpdateGameBoard(BoardCell[,] i_Board, int i_Player1Score, int i_Player2Score)
+        public void UpdateGameBoard(BoardCell[,] i_Board)
         {
-            //I think that the score will be per match .... 
-
             for (int i = 0; i < m_BoardSize; i++)
             {
-                for (int j = 0; j < m_BoardSize; j++)// maybe here we need to go only on enable buttons
+                for (int j = 0; j < m_BoardSize; j++)
                 {
-                    m_BoardButton[i, j].Text = i_Board[i, j].CellValue.ToString();
+                    if (!((i + j) % 2 == 0))
+                    {
+                        m_BoardButton[i, j].BackColor = Color.White;
+                        string cellValue = "";
+
+                        switch (i_Board[i, j].CellValue)
+                        {
+                            case eCellValue.Empty:
+                                cellValue = " ";
+                                break;
+                            case eCellValue.Player1King:
+                                cellValue = "Z";
+                                break;
+                            case eCellValue.Player1Soldier:
+                                cellValue = "X";
+                                break;
+                            case eCellValue.Player2King:
+                                cellValue = "Q";
+                                break;
+                            case eCellValue.Player2Soldier:
+                                cellValue = "O";
+                                break;
+                        }
+
+                        m_BoardButton[i, j].Text = cellValue;
+                    }
                 }
             }
         }
@@ -84,7 +108,6 @@ namespace B22_Ex05
 
             dialogResult = MessageBox.Show(messgae, "Damka", MessageBoxButtons.YesNo);
 
-
             if (dialogResult == DialogResult.No)
             {
                 this.Close();
@@ -92,8 +115,10 @@ namespace B22_Ex05
 
             if (dialogResult == DialogResult.Yes)
             {
-                //return to Game that the player want to play another round ..
-                //after reset board in game need to cal to UpdateGameBoard
+                m_Game.ResetGame();
+                m_Player1Label.Text = string.Format("Player 1: {0}", m_Player1Score);
+                m_Player2Label.Text = string.Format("Player 2: {0}", m_Player2Score);
+                UpdateGameBoard(m_Game.GetBoard.GetBoardCell);
             }
         }
 
@@ -104,41 +129,129 @@ namespace B22_Ex05
 
         private void button_Click(object i_Sender, EventArgs e)
         {
-            Button currentButton = i_Sender as Button;
+            Button currentButtonClicked = i_Sender as Button;
 
-            //if (currentButton.Click)
-            //{
+            if (currentButtonClicked.Enabled)
+            {
+                if (v_Player1Turn) // player 1 turn ( + computer turn right after if needed
+                {
+                    if (v_AnotherButtonClicked) // this is the second button that clicked
+                    {
+                        if (m_Move.Equals(currentButtonClicked.Name))//this is the same button
+                        {
+                            m_Move = "";
+                            currentButtonClicked.BackColor = Color.White;
+                            v_AnotherButtonClicked = false;
+                        }
+                        else // another button pressed by the player -> make move!
+                        {
+                            m_Move += ">" + currentButtonClicked.Name;
+                            v_AnotherButtonClicked = false;
 
-            //}
+                            try
+                            {
+                                m_Game.Player1Move(m_Move);
+                            }
+                            catch (ArgumentException x)
+                            {
+                                ErrorMessageBox(x.Message);
+                                v_Player1Turn = !v_Player1Turn;
+                            }
 
-            /* if current button click 
-             *      get location of button: Point fromCell
-             *      backColor = blue;
-             *      if another button was click
-             *          get location of new button: Point ToCell
-             *          sent fromTo locations to Game class
-             *          current button backColor = white
-             *          (Game class make move etc .. if move iligal then ErrorMessageBox)
-             *      if same button was clicked
-             *          backColor = white;
-             *          (no move set .. meaning go out from function)
-             *          
-             */
+                            UpdateGameBoard(m_Game.GetBoard.GetBoardCell);
 
+                            if (m_Game.isWonOrDraw() != eGameResult.None)
+                            {
+                                gameResult(m_Game.isWonOrDraw());
+                            }
+
+                            if (!m_Game.v_PlayerVsPlayerMode && v_Player1Turn)//play against computer
+                            {
+                                m_Game.Player2Move("");
+                                UpdateGameBoard(m_Game.GetBoard.GetBoardCell);
+                            }
+
+                            else
+                            {
+                                v_Player1Turn = !v_Player1Turn;
+                            }
+
+                            //check if after move player won
+                            if (m_Game.isWonOrDraw() != eGameResult.None)
+                            {
+                                gameResult(m_Game.isWonOrDraw());
+                            }
+                        }
+                    }
+
+                    else // this is the first button that was clicked
+                    {
+                        if (currentButtonClicked.Text.Equals("X") || currentButtonClicked.Text.Equals("Z"))
+                        {
+                            m_Move = currentButtonClicked.Name;
+                            currentButtonClicked.BackColor = Color.LightBlue;
+                            v_AnotherButtonClicked = true;
+                        }
+                    }
+                }
+
+                else // player 2 turn (this human turn! without computer move!)
+                {
+                    if (v_AnotherButtonClicked) // this is the second button that clicked
+                    {
+                        if (m_Move.Equals(currentButtonClicked.Name))//this is the same button
+                        {
+                            m_Move = "";
+                            currentButtonClicked.BackColor = Color.White;
+                            v_AnotherButtonClicked = false;
+                        }
+
+                        else // another button pressed by the player -> make move!
+                        {
+                            m_Move += ">" + currentButtonClicked.Name;
+                            v_AnotherButtonClicked = false;
+
+                            try
+                            {
+                                m_Game.Player2Move(m_Move);
+                            }
+                            catch (ArgumentException x)
+                            {
+                                v_Player1Turn = !v_Player1Turn;
+                                ErrorMessageBox(x.Message);
+                            }
+
+                            UpdateGameBoard(m_Game.GetBoard.GetBoardCell);
+                            v_Player1Turn = !v_Player1Turn;
+
+                            //check if after move player won
+                            if (m_Game.isWonOrDraw() != eGameResult.None)
+                            {
+                                gameResult(m_Game.isWonOrDraw());
+                            }
+                        }
+                    }
+
+                    else // this is the first button that was clicked
+                    {
+                        if (currentButtonClicked.Text.Equals("O") || currentButtonClicked.Text.Equals("Q"))
+                        {
+                            m_Move = currentButtonClicked.Name;
+                            currentButtonClicked.BackColor = Color.LightBlue;
+                            v_AnotherButtonClicked = true;
+                        }
+                    }
+                }
+            }
         }
 
         private void initializeComponent()
         {
-            //this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            //this.ClientSize = new System.Drawing.Size(612, 484);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Name = "GameForm";
             this.Text = "Damka";
             this.MaximizeBox = false;
-            //this.ResumeLayout(false);
-            this.ClientSize = new Size(30 + 50 * m_BoardSize, 80 + 50 * m_BoardSize);
-
+            this.ClientSize = new Size(100 + 30 * m_BoardSize, 100 + 30 * m_BoardSize);
             Button button;
             m_BoardButton = new Button[m_BoardSize, m_BoardSize];
 
@@ -148,13 +261,13 @@ namespace B22_Ex05
                 {
                     button = new Button();
                     button.Size = new Size(30, 30);
-                    button.Name = i.ToString() + j.ToString(); // each button will know his location in the matrix
 
-                    //button.Location = new Point(20 + j * button.Size.Width, 50 + i * button.Size.Height);//check this
-                    //TODO: How to set up the position?
+                    // each button will know his location in the matrix by a string representing as in Ex02
+                    button.Name = Convert.ToChar(j + 'A').ToString() + Convert.ToChar(i + 'a').ToString();
+                    button.Location = new Point(50 + j * button.Size.Width, 50 + i * button.Size.Height);//check this
+                    button.Click += this.button_Click;
                     m_BoardButton[i, j] = button;
                     Controls.Add(button);
-
                 }
             }
 
@@ -162,15 +275,15 @@ namespace B22_Ex05
 
             m_Player1Label = new Label();
             m_Player1Label.Text = string.Format("Player 1: {0}", m_Player1Score);
-            //m_Player1Label.Location = new point();
+            m_Player1Label.Location = new Point((50 * this.m_BoardSize) / 6, 20);
             Controls.Add(m_Player1Label);
-
 
             m_Player2Label = new Label();
             m_Player2Label.Text = string.Format("Player 2: {0}", m_Player2Score);
-            //m_Player2Label.Location = 
+            m_Player2Label.Location = new Point((75 * this.m_BoardSize) / 3, 20);
             Controls.Add(m_Player2Label);
 
+            UpdateGameBoard(m_Game.GetBoard.GetBoardCell);
         }
     }
 }
