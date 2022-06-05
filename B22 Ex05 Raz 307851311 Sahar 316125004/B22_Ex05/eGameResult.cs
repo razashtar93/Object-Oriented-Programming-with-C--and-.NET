@@ -9,6 +9,7 @@ namespace B22_Ex05
     {
         Player1Won,
         Player2Won,
-        Tie
+        Tie,
+        None // meaning that game is not finished yet ...
     }
 }

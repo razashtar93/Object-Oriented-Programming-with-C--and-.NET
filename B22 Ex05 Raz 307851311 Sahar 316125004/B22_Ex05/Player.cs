@@ -10,7 +10,6 @@ namespace B22_Ex05
         private string m_Name;
         private int m_Score;
 
-
         public Player(string i_Name)
         {
             m_Name = i_Name;
@@ -21,6 +20,7 @@ namespace B22_Ex05
         {
             get { return m_Name; }
         }
+       
         public int Score
         {
             get => m_Score;

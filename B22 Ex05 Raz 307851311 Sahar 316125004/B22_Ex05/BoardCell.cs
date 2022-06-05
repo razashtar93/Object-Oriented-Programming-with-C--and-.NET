@@ -7,10 +7,11 @@ namespace B22_Ex05
 {
     public class BoardCell
     {
+        private eCellValue m_CellValue;
         public eCellValue CellValue
         {
-            get;
-            set;
+            get { return m_CellValue; }
+            set { m_CellValue = value; }
         }
 
         public BoardCell()
