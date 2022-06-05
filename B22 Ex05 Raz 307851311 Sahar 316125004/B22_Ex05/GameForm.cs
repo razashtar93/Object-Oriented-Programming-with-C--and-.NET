@@ -163,6 +163,7 @@ namespace B22_Ex05
                             if (m_Game.isWonOrDraw() != eGameResult.None)
                             {
                                 gameResult(m_Game.isWonOrDraw());
+                                return;
                             }
 
                             if (!m_Game.v_PlayerVsPlayerMode && v_Player1Turn)//play against computer
