@@ -93,9 +93,39 @@ namespace B22_Ex05
             if (dialogResult == DialogResult.Yes)
             {
                 //return to Game that the player want to play another round ..
+                //after reset board in game need to cal to UpdateGameBoard
             }
         }
 
+        public void ErrorMessageBox(string i_ErrorMessage)
+        {
+            MessageBox.Show(i_ErrorMessage);
+        }
+
+        private void button_Click(object i_Sender, EventArgs e)
+        {
+            Button currentButton = i_Sender as Button;
+
+            //if (currentButton.Click)
+            //{
+
+            //}
+
+            /* if current button click 
+             *      get location of button: Point fromCell
+             *      backColor = blue;
+             *      if another button was click
+             *          get location of new button: Point ToCell
+             *          sent fromTo locations to Game class
+             *          current button backColor = white
+             *          (Game class make move etc .. if move iligal then ErrorMessageBox)
+             *      if same button was clicked
+             *          backColor = white;
+             *          (no move set .. meaning go out from function)
+             *          
+             */
+
+        }
 
         private void initializeComponent()
         {
@@ -118,6 +148,8 @@ namespace B22_Ex05
                 {
                     button = new Button();
                     button.Size = new Size(30, 30);
+                    button.Name = i.ToString() + j.ToString(); // each button will know his location in the matrix
+
                     //button.Location = new Point(20 + j * button.Size.Width, 50 + i * button.Size.Height);//check this
                     //TODO: How to set up the position?
                     m_BoardButton[i, j] = button;
